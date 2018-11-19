@@ -11,11 +11,11 @@ BaseWindow::BaseWindow(QWidget *parent) :
 	// WindowMinimizeButtonHint 属性设置在窗口最小化时，点击任务栏窗口可以显示出原窗口;
 	this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint);
 	// 设置窗口背景透明;
-//	setAttribute(Qt::WA_TranslucentBackground);
+	//  setAttribute(Qt::WA_TranslucentBackground);
 
 	// 注意！！！如果是主窗口不要设置WA_DeleteOnClose属性;
 	// 关闭窗口时释放资源;
-//	setAttribute(Qt::WA_DeleteOnClose);
+	//  setAttribute(Qt::WA_DeleteOnClose);
 	// 初始化标题栏;
 	initTitleBar();
 }

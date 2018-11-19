@@ -29,17 +29,17 @@ SOURCES += \
         LoginDialog.cpp \
     TitleBar.cpp \
     BaseWindow.cpp \
-    test.cpp
+    RegisterDialog.cpp
 
 HEADERS += \
         LoginDialog.h \
     TitleBar.h \
     BaseWindow.h \
-    test.h
+    RegisterDialog.h
 
 FORMS += \
         LoginDialog.ui \
-    test.ui
+    RegisterDialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

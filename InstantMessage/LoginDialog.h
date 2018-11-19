@@ -1,10 +1,10 @@
 ﻿#ifndef LOGINDIALOG_H
 #define LOGINDIALOG_H
 
-#include <QDialog>
 #include <QMessageBox>
 #include <QTableView>
 #include <QIcon>
+#include <QUrl>
 #include "BaseWindow.h"
 
 namespace Ui
@@ -19,6 +19,7 @@ class LoginDialog : public BaseWindow
 public:
 	explicit LoginDialog(QWidget *parent = nullptr);
 	void initTitleBar();
+	void loadHeadImg();
 	~LoginDialog();
 
 

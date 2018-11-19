@@ -18,6 +18,8 @@ LoginDialog::LoginDialog(QWidget *parent) :
 	                                Qt::IgnoreAspectRatio,
 	                                Qt::SmoothTransformation)));    // 使用平滑的缩放方式
 	this->setPalette(palette);                                      // 给widget加上背景图
+	//设置默认头像
+	loadHeadImg();
 	//设置输入框icon
 	ui->editAccount->addAction(QIcon(":/src/image/user.png"), QLineEdit::LeadingPosition);
 	ui->editPassword->addAction(QIcon(":/src/image/key.svg"), QLineEdit::LeadingPosition);
@@ -37,9 +39,16 @@ void LoginDialog::initTitleBar()
 	titleBarPtr->setTitleWidth(this->width());
 	titleBarPtr->setBackgroundColor(219, 219, 255);
 }
+
+void LoginDialog::loadHeadImg()
+{
+	ui->headImg->setPixmap(QPixmap(":/src/image/head.png"));
+}
+
 void LoginDialog::on_btRegister_clicked()
 {
-
+	this->hide();
+	emit showRegister();
 }
 
 void LoginDialog::on_btLogin_clicked()

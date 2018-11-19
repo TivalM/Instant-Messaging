@@ -35,7 +35,7 @@ TitleBar::~TitleBar()
 void TitleBar::initControl()
 {
 	icon = new QLabel;
-	titleContent = new QLabel;
+	titleContentPtr = new QLabel;
 
 	btMin = new QPushButton;
 	btRestore = new QPushButton;
@@ -47,7 +47,7 @@ void TitleBar::initControl()
 	btMax->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
 	btClose->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
 
-	titleContent->setObjectName("TitleContent");
+	titleContentPtr->setObjectName("TitleContent");
 	btMin->setObjectName("ButtonMin");
 	btRestore->setObjectName("ButtonRestore");
 	btMax->setObjectName("ButtonMax");
@@ -68,7 +68,7 @@ void TitleBar::initControl()
 
 	QHBoxLayout *mylayout = new QHBoxLayout(this);
 	mylayout->addWidget(icon);
-	mylayout->addWidget(titleContent);
+	mylayout->addWidget(titleContentPtr);
 
 	mylayout->addWidget(btMin);
 	mylayout->addWidget(btRestore);
@@ -82,7 +82,7 @@ void TitleBar::initControl()
 	btClose->setIcon(QIcon(":/src/image/close.svg"));
 
 
-	titleContent->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+	titleContentPtr->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 	this->setFixedHeight(TITLE_HEIGHT);
 	this->setWindowFlags(Qt::FramelessWindowHint);
 }
@@ -124,15 +124,15 @@ void TitleBar::setTitleIcon(QString filePath, QSize IconSize)
 }
 
 // 设置标题内容;
-void TitleBar::setTitleContent(QString titleContent, int titleFontSize)
+void TitleBar::setTitleContent(QString tContent, int titleFontSize)
 {
-//	// 设置标题字体大小;
-//	QFont font = titleContent->font();
-//	font.setPointSize(titleFontSize);
-//	titleContent->setFont(font);
-//	// 设置标题内容;
-//	titleContent->setText(titleContent);
-//	m_titleContent = titleContent;
+	// 设置标题字体大小;
+	QFont font = titleContentPtr->font();
+	font.setBold(true);
+	font.setPointSize(titleFontSize);
+	titleContentPtr->setFont(font);
+	// 设置标题内容;
+	titleContentPtr->setText(tContent);
 }
 
 // 设置标题栏长度;

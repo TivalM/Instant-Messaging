@@ -25,7 +25,7 @@ public:
 	// 设置标题栏图标;
 	void setTitleIcon(QString filePath, QSize IconSize = QSize(25, 25));
 	// 设置标题内容;
-	void setTitleContent(QString titleContent, int titleFontSize = 9);
+	void setTitleContent(QString titleContentPtr, int titleFontSize = 9);
 	// 设置标题栏长度;
 	void setTitleWidth(int width);
 	// 设置标题栏上按钮类型;
@@ -70,7 +70,7 @@ private slots:
 
 private:
 	QLabel *icon;                    // 标题栏图标;
-	QLabel *titleContent;            // 标题栏内容;
+	QLabel *titleContentPtr;            // 标题栏内容;
 	QPushButton *btMin;          // 最小化按钮;
 	QPushButton *btRestore;      // 最大化还原按钮;
 	QPushButton *btMax;          // 最大化按钮;
