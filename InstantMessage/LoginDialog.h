@@ -1,6 +1,6 @@
 ﻿#ifndef LOGINDIALOG_H
 #define LOGINDIALOG_H
-
+#pragma once
 #include <QMessageBox>
 #include <QTableView>
 #include <QIcon>
@@ -28,7 +28,7 @@ private:
 
 private slots:
 	void receiveShow();     //收到由其它界面发送的信号时，该页面自主显示
-
+	void receiveHide();
 	void on_btRegister_clicked();
 	void on_btLogin_clicked();
 

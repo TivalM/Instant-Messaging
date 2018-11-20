@@ -29,17 +29,27 @@ SOURCES += \
         LoginDialog.cpp \
     TitleBar.cpp \
     BaseWindow.cpp \
-    RegisterDialog.cpp
+    RegisterDialog.cpp \
+    MainDialog.cpp \
+    SessionForm.cpp \
+    PerPersonForm.cpp
 
 HEADERS += \
         LoginDialog.h \
     TitleBar.h \
     BaseWindow.h \
-    RegisterDialog.h
+    RegisterDialog.h \
+    MainDialog.h \
+    SessionForm.h \
+    PerPersonForm.h
 
 FORMS += \
         LoginDialog.ui \
-    RegisterDialog.ui
+    RegisterDialog.ui \
+    MainDialog.ui \
+    SessionForm.ui \
+    PerPersonForm.ui \
+    FunctionTitleBar.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

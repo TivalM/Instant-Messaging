@@ -1,15 +1,13 @@
 ﻿#include "BaseWindow.h"
-#include <QDesktopWidget>
-#include <QApplication>
-#include <QPainter>
-#include <QFile>
 
-BaseWindow::BaseWindow(QWidget *parent) :
+
+BaseWindow::BaseWindow(QWidget *parent, int windowType) :
 	QDialog(parent)
 {
 	// FramelessWindowHint属性设置窗口去除边框;
 	// WindowMinimizeButtonHint 属性设置在窗口最小化时，点击任务栏窗口可以显示出原窗口;
 	this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint);
+	sizePolicy();
 	// 设置窗口背景透明;
 	//  setAttribute(Qt::WA_TranslucentBackground);
 
@@ -17,7 +15,7 @@ BaseWindow::BaseWindow(QWidget *parent) :
 	// 关闭窗口时释放资源;
 	//  setAttribute(Qt::WA_DeleteOnClose);
 	// 初始化标题栏;
-	initTitleBar();
+	initTitleBar(windowType);
 }
 
 
@@ -26,9 +24,9 @@ BaseWindow::~BaseWindow()
 
 }
 
-void BaseWindow::initTitleBar()
+void BaseWindow::initTitleBar(int type)
 {
-	titleBarPtr = new TitleBar(this);
+	titleBarPtr = new TitleBar(this, type);
 	titleBarPtr->move(0, 0);
 
 	connect(titleBarPtr, SIGNAL(signalButtonMinClicked()), this, SLOT(onButtonMinClicked()));
@@ -86,3 +84,19 @@ void BaseWindow::onButtonCloseClicked()
 {
 	close();
 }
+
+void BaseWindow::resizeEvent(QResizeEvent *event)
+{
+	Q_UNUSED(event);
+	titleBarPtr->resize(this->width(), 30);
+}
+
+//void BaseWindow::closeWindow()
+//{
+//	QPropertyAnimation *animation = new QPropertyAnimation(this, "windowOpacity");
+//	animation->setDuration(1);
+//	animation->setStartValue(100);
+//	animation->setEndValue(0);
+//	animation->start();
+//	connect(animation, SIGNAL(QPropertyAnimation::finished()), this, SLOT(this.close()));
+//}

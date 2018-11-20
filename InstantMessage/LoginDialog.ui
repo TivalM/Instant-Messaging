@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>456</height>
+    <width>690</width>
+    <height>548</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -79,7 +79,10 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="4,7,4">
      <property name="topMargin">
-      <number>30</number>
+      <number>20</number>
+     </property>
+     <property name="bottomMargin">
+      <number>20</number>
      </property>
      <item>
       <spacer name="horizontalSpacer_4">
@@ -105,6 +108,7 @@
        <property name="font">
         <font>
          <family>微软雅黑</family>
+         <pointsize>12</pointsize>
         </font>
        </property>
       </widget>
@@ -130,7 +134,7 @@
       <number>20</number>
      </property>
      <property name="bottomMargin">
-      <number>10</number>
+      <number>20</number>
      </property>
      <item>
       <spacer name="horizontalSpacer_6">
@@ -156,6 +160,7 @@
        <property name="font">
         <font>
          <family>微软雅黑</family>
+         <pointsize>12</pointsize>
         </font>
        </property>
       </widget>
@@ -190,6 +195,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="8,3,2,3,8">
+     <property name="topMargin">
+      <number>15</number>
+     </property>
      <item>
       <spacer name="horizontalSpacer_8">
        <property name="orientation">

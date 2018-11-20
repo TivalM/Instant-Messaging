@@ -5,7 +5,6 @@ LoginDialog::LoginDialog(QWidget *parent) :
 	BaseWindow(parent),
 	ui(new Ui::LoginDialog)
 {
-
 	ui->setupUi(this);
 	//设置背景
 	// 初始化标题栏;
@@ -22,7 +21,7 @@ LoginDialog::LoginDialog(QWidget *parent) :
 	loadHeadImg();
 	//设置输入框icon
 	ui->editAccount->addAction(QIcon(":/src/image/user.png"), QLineEdit::LeadingPosition);
-	ui->editPassword->addAction(QIcon(":/src/image/key.svg"), QLineEdit::LeadingPosition);
+	ui->editPassword->addAction(QIcon(":/src/image/lock.png"), QLineEdit::LeadingPosition);
 
 	//设置输入提示
 	ui->editAccount->setPlaceholderText(QString::fromLocal8Bit("请输入用户名"));
@@ -33,9 +32,10 @@ LoginDialog::~LoginDialog()
 {
 	delete ui;
 }
+
 void LoginDialog::initTitleBar()
 {
-	titleBarPtr->setButtonType(MIN_BUTTON);
+	titleBarPtr->setButtonType(MIN_MAX_BUTTON);
 	titleBarPtr->setTitleWidth(this->width());
 	titleBarPtr->setBackgroundColor(219, 219, 255);
 }
@@ -47,7 +47,6 @@ void LoginDialog::loadHeadImg()
 
 void LoginDialog::on_btRegister_clicked()
 {
-	this->hide();
 	emit showRegister();
 }
 
@@ -63,12 +62,18 @@ void LoginDialog::on_btLogin_clicked()
 	if (!state)
 		QMessageBox::information(this, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("用户名或密码错误"));
 	else {
-		this->hide();
 		emit showMain();
+		this->hide();
 	}
 }
 
 void LoginDialog::receiveShow()
 {
+	this->hide();
 	this->show();
+}
+
+void LoginDialog::receiveHide()
+{
+	this->hide();
 }

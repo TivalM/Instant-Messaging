@@ -4,13 +4,15 @@
 #include <QFile>
 #include <QMouseEvent>
 
+
 #define BUTTON_HEIGHT 30        // 按钮高度;
 #define BUTTON_WIDTH 30         // 按钮宽度;
 #define TITLE_HEIGHT 30         // 标题栏高度;
 
 
-TitleBar::TitleBar(QWidget *parent) :
+TitleBar::TitleBar(QWidget *parent,  int windowType) :
 	QWidget(parent)
+	, windowType(windowType)
 	, m_colorR(153)
 	, m_colorG(153)
 	, m_colorB(153)
@@ -25,6 +27,7 @@ TitleBar::TitleBar(QWidget *parent) :
 	// 加载本地样式 MyTitle.css文件;
 //	loadStyleSheet("MyTitle");
 }
+
 TitleBar::~TitleBar()
 {
 
@@ -36,64 +39,98 @@ void TitleBar::initControl()
 {
 	icon = new QLabel;
 	titleContentPtr = new QLabel;
+	if (windowType == 0) {
+		//登陆与注册界面标题栏
+		btMinSimpleBar = new QPushButton;
+		btRestoreSimpleBar = new QPushButton;
+		btMaxSimpleBar = new QPushButton;
+		btCloseSimpleBar = new QPushButton;
 
-	btMin = new QPushButton;
-	btRestore = new QPushButton;
-	btMax = new QPushButton;
-	btClose = new QPushButton;
+		btMinSimpleBar->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
+		btRestoreSimpleBar->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
+		btMaxSimpleBar->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
+		btCloseSimpleBar->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
 
-	btMin->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
-	btRestore->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
-	btMax->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
-	btClose->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
-
-	titleContentPtr->setObjectName("TitleContent");
-	btMin->setObjectName("ButtonMin");
-	btRestore->setObjectName("ButtonRestore");
-	btMax->setObjectName("ButtonMax");
-	btClose->setObjectName("ButtonClose");
-
-
-
-	btMin->setToolTip(QStringLiteral("最小化"));
-	btRestore->setToolTip(QStringLiteral("还原"));
-	btMax->setToolTip(QStringLiteral("最大化"));
-	btClose->setToolTip(QStringLiteral("关闭"));
+		titleContentPtr->setObjectName("TitleContent");
+		btMinSimpleBar->setObjectName("ButtonMin");
+		btRestoreSimpleBar->setObjectName("ButtonRestore");
+		btMaxSimpleBar->setObjectName("ButtonMax");
+		btCloseSimpleBar->setObjectName("ButtonClose");
 
 
-	btMin->setFlat(true);
-	btRestore->setFlat(true);
-	btMax->setFlat(true);
-	btClose->setFlat(true);
 
-	QHBoxLayout *mylayout = new QHBoxLayout(this);
-	mylayout->addWidget(icon);
-	mylayout->addWidget(titleContentPtr);
-
-	mylayout->addWidget(btMin);
-	mylayout->addWidget(btRestore);
-	mylayout->addWidget(btMax);
-	mylayout->addWidget(btClose);
-
-	mylayout->setContentsMargins(5, 0, 0, 0);
-	mylayout->setSpacing(0);
-
-	btMin->setIcon(QIcon(":/src/image/min.svg"));
-	btClose->setIcon(QIcon(":/src/image/close.svg"));
+		btMinSimpleBar->setToolTip(QStringLiteral("最小化"));
+		btRestoreSimpleBar->setToolTip(QStringLiteral("还原"));
+		btMaxSimpleBar->setToolTip(QStringLiteral("最大化"));
+		btCloseSimpleBar->setToolTip(QStringLiteral("关闭"));
 
 
-	titleContentPtr->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-	this->setFixedHeight(TITLE_HEIGHT);
-	this->setWindowFlags(Qt::FramelessWindowHint);
+		btMinSimpleBar->setFlat(true);
+		btRestoreSimpleBar->setFlat(true);
+		btMaxSimpleBar->setFlat(true);
+		btCloseSimpleBar->setFlat(true);
+
+		QHBoxLayout *mylayout = new QHBoxLayout(this);
+		mylayout->addWidget(icon);
+		mylayout->addWidget(titleContentPtr);
+
+		mylayout->addWidget(btMinSimpleBar);
+		mylayout->addWidget(btRestoreSimpleBar);
+		mylayout->addWidget(btMaxSimpleBar);
+		mylayout->addWidget(btCloseSimpleBar);
+
+		mylayout->setContentsMargins(5, 0, 0, 0);
+		mylayout->setSpacing(0);
+
+		btMinSimpleBar->setIcon(QIcon(":/src/image/min.svg"));
+		btMaxSimpleBar->setIcon(QIcon(":/src/image/max.png"));
+		btCloseSimpleBar->setIcon(QIcon(":/src/image/close.svg"));
+		btRestoreSimpleBar->setIcon(QIcon(":/src/image/restore.png"));
+
+		titleContentPtr->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+		this->setFixedHeight(TITLE_HEIGHT);
+		this->setWindowFlags(Qt::FramelessWindowHint);
+	} else {
+		//主界面标题栏
+		barForm = new QWidget;
+		functionBarUI.setupUi(barForm);
+
+		QHBoxLayout *mylayout = new QHBoxLayout(this);
+		mylayout->addWidget(barForm);
+
+		mylayout->setContentsMargins(0, 0, 0, 0);
+		mylayout->setSpacing(0);
+
+		functionBarUI.btRestore->setVisible(false);
+		functionBarUI.btMin->setIcon(QIcon(":/src/image/min.svg"));
+		functionBarUI.btMax->setIcon(QIcon(":/src/image/max.png"));
+		functionBarUI.btClose->setIcon(QIcon(":/src/image/close.svg"));
+		functionBarUI.btRestore->setIcon(QIcon(":/src/image/restore.png"));
+		functionBarUI.btRing->setIcon(QIcon(":/src/image/ring.png"));
+		functionBarUI.btSessions->setIcon(QIcon(":/src/image/chat.png"));
+		functionBarUI.btFriends->setIcon(QIcon(":/src/image/friend.png"));
+		functionBarUI.btTool->setIcon(QIcon(":/src/image/tool.png"));
+		functionBarUI.btAdd->setIcon(QIcon(":/src/image/add.png"));
+
+		this->setFixedHeight(50);
+		this->setWindowFlags(Qt::FramelessWindowHint);
+	}
 }
 
 // 信号槽的绑定;
 void TitleBar::initConnections()
 {
-	connect(btMin, SIGNAL(clicked()), this, SLOT(onButtonMinClicked()));
-	connect(btRestore, SIGNAL(clicked()), this, SLOT(onButtonRestoreClicked()));
-	connect(btMax, SIGNAL(clicked()), this, SLOT(onButtonMaxClicked()));
-	connect(btClose, SIGNAL(clicked()), this, SLOT(onButtonCloseClicked()));
+	if (windowType == 0) {
+		connect(btMinSimpleBar, SIGNAL(clicked()), this, SLOT(onButtonMinClicked()));
+		connect(btRestoreSimpleBar, SIGNAL(clicked()), this, SLOT(onButtonRestoreClicked()));
+		connect(btMaxSimpleBar, SIGNAL(clicked()), this, SLOT(onButtonMaxClicked()));
+		connect(btCloseSimpleBar, SIGNAL(clicked()), this, SLOT(onButtonCloseClicked()));
+	} else {
+		connect(functionBarUI.btMin, SIGNAL(clicked()), this, SLOT(onButtonMinClicked()));
+		connect(functionBarUI.btRestore, SIGNAL(clicked()), this, SLOT(onButtonRestoreClicked()));
+		connect(functionBarUI.btMax, SIGNAL(clicked()), this, SLOT(onButtonMaxClicked()));
+		connect(functionBarUI.btClose, SIGNAL(clicked()), this, SLOT(onButtonCloseClicked()));
+	}
 }
 
 // 设置标题栏背景色,在paintEvent事件中进行绘制标题栏背景色;
@@ -104,14 +141,24 @@ void TitleBar::setBackgroundColor(int r, int g, int b, bool isTransparent)
 	m_colorG = g;
 	m_colorB = b;
 	m_isTransparent = isTransparent;
-
+	QString css = QString("background-color: rgb(%1,%2,%3);").arg(r).arg(g).arg(b).append("border:none");
 
 	//设置按钮背景色
-
-	btMin->setStyleSheet(QString("background-color: rgb(%1,%2,%3);").arg(r).arg(g).arg(b).append("border:none"));
-	btRestore->setStyleSheet(QString("background-color: rgb(%1,%2,%3);").arg(r).arg(g).arg(b).append("border:none"));
-	btMax->setStyleSheet(QString("background-color: rgb(%1,%2,%3);").arg(r).arg(g).arg(b).append("border:none"));
-	btClose->setStyleSheet(QString("background-color: rgb(%1,%2,%3);").arg(r).arg(g).arg(b).append("border:none"));
+	if (windowType == 0) {
+		btMinSimpleBar->setStyleSheet(css);
+		btRestoreSimpleBar->setStyleSheet(css);
+		btMaxSimpleBar->setStyleSheet(css);
+		btCloseSimpleBar->setStyleSheet(css);
+	} else {
+		functionBarUI.btMin->setStyleSheet(css);
+		functionBarUI.btRestore->setStyleSheet(css);
+		functionBarUI.btMax->setStyleSheet(css);
+		functionBarUI.btClose->setStyleSheet(css);
+		functionBarUI.btRing->setStyleSheet(css);
+		functionBarUI.btSessions->setStyleSheet(css);
+		functionBarUI.btFriends->setStyleSheet(css);
+		functionBarUI.btTool->setStyleSheet(css);
+	}
 	// 重新绘制（调用paintEvent事件）;
 	update();
 }
@@ -146,22 +193,24 @@ void TitleBar::setTitleWidth(int width)
 // 这里提供了四个按钮，分别为最小化、还原、最大化、关闭按钮，如果需要其他按钮可自行添加设置;
 void TitleBar::setButtonType(ButtonType buttonType)
 {
+	if (windowType == 1)
+		return;
 	m_buttonType = buttonType;
 
 	switch (buttonType) {
 	case MIN_BUTTON: {
-		btRestore->setVisible(false);
-		btMax->setVisible(false);
+		btRestoreSimpleBar->setVisible(false);
+		btMaxSimpleBar->setVisible(false);
 	}
 	break;
 	case MIN_MAX_BUTTON: {
-		btRestore->setVisible(false);
+		btRestoreSimpleBar->setVisible(false);
 	}
 	break;
 	case ONLY_CLOSE_BUTTON: {
-		btMin->setVisible(false);
-		btRestore->setVisible(false);
-		btMax->setVisible(false);
+		btMinSimpleBar->setVisible(false);
+		btRestoreSimpleBar->setVisible(false);
+		btMaxSimpleBar->setVisible(false);
 	}
 	break;
 	default:
@@ -170,7 +219,6 @@ void TitleBar::setButtonType(ButtonType buttonType)
 }
 
 // 设置标题栏中的标题是否会自动滚动，跑马灯的效果;
-// 一般情况下标题栏中的标题内容是不滚动的，但是既然自定义就看自己需要嘛，想怎么设计就怎么搞O(∩_∩)O！
 void TitleBar::setTitleRoll()
 {
 	connect(&m_titleRollTimer, SIGNAL(timeout()), this, SLOT(onRollTitle()));
@@ -223,11 +271,19 @@ void TitleBar::paintEvent(QPaintEvent *event)
 // 双击响应事件，主要是实现双击标题栏进行最大化和最小化操作;
 void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
 {
-	// 只有存在最大化、还原按钮时双击才有效;
-	if (m_buttonType == MIN_MAX_BUTTON) {
-		// 通过最大化按钮的状态判断当前窗口是处于最大化还是原始大小状态;
-		// 或者通过单独设置变量来表示当前窗口状态;
-		if (btMax->isVisible()) {
+	if (windowType == 0) {
+		// 只有存在最大化、还原按钮时双击才有效;
+		if (m_buttonType == MIN_MAX_BUTTON) {
+			// 通过最大化按钮的状态判断当前窗口是处于最大化还是原始大小状态;
+			// 或者通过单独设置变量来表示当前窗口状态;
+			if (btMaxSimpleBar->isVisible()) {
+				onButtonMaxClicked();
+			} else {
+				onButtonRestoreClicked();
+			}
+		}
+	} else {
+		if (functionBarUI.btMax->isVisible()) {
 			onButtonMaxClicked();
 		} else {
 			onButtonRestoreClicked();
@@ -240,9 +296,14 @@ void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
 // 以下通过mousePressEvent、mouseMoveEvent、mouseReleaseEvent三个事件实现了鼠标拖动标题栏移动窗口的效果;
 void TitleBar::mousePressEvent(QMouseEvent *event)
 {
-	if (m_buttonType == MIN_MAX_BUTTON) {
-		// 在窗口最大化时禁止拖动窗口;
-		if (btMax->isVisible()) {
+	if (windowType == 0) {
+		if (m_buttonType == MIN_MAX_BUTTON) {
+			// 在窗口最大化时禁止拖动窗口;
+			if (btMaxSimpleBar->isVisible()) {
+				m_isPressed = true;
+				m_startMovePos = event->globalPos();
+			}
+		} else {
 			m_isPressed = true;
 			m_startMovePos = event->globalPos();
 		}
@@ -292,16 +353,27 @@ void TitleBar::onButtonMinClicked()
 
 void TitleBar::onButtonRestoreClicked()
 {
-	btRestore->setVisible(false);
-	btMax->setVisible(true);
+	if (windowType == 0) {
+		btRestoreSimpleBar->setVisible(false);
+		btMaxSimpleBar->setVisible(true);
+	} else {
+		functionBarUI.btRestore->setVisible(false);
+		functionBarUI.btMax->setVisible(true);
+	}
 	emit signalButtonRestoreClicked();
 }
 
 void TitleBar::onButtonMaxClicked()
 {
-	btMax->setVisible(false);
-	btRestore->setVisible(true);
-	emit signalButtonMaxClicked();
+	if (windowType == 0) {
+		btMaxSimpleBar->setVisible(false);
+		btRestoreSimpleBar->setVisible(true);
+		emit signalButtonMaxClicked();
+	} else {
+		functionBarUI.btMax->setVisible(false);
+		functionBarUI.btRestore->setVisible(true);
+		emit signalButtonMaxClicked();
+	}
 }
 
 void TitleBar::onButtonCloseClicked()

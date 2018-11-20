@@ -1,22 +1,28 @@
 ﻿#ifndef TITLEBAR_H
 #define TITLEBAR_H
-
+#pragma once
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
 #include <QTimer>
 #include <QIcon>
 #include <QDebug>
+#include <QHBoxLayout>
+#include <QPainter>
+#include <QFile>
+#include <QMouseEvent>
+#include "ui_FunctionTitleBar.h"
 enum ButtonType {
 	MIN_BUTTON = 0,         // 最小化和关闭按钮;
 	MIN_MAX_BUTTON,         // 最小化、最大化和关闭按钮;
 	ONLY_CLOSE_BUTTON       // 只有关闭按钮;
 };
+
 class TitleBar : public QWidget
 {
 	Q_OBJECT
 public:
-	TitleBar(QWidget *parent);
+	TitleBar(QWidget *parent, int windowType = 0);
 	//这里parent没有给默认值NULL，保证在创建MyTitleBar对象时父指针必须得赋值;且赋值不为NULL;
 	~TitleBar();
 
@@ -69,12 +75,15 @@ private slots:
 	void onRollTitle();
 
 private:
+	QWidget *barForm;
+	Ui::FunctionTitleBar functionBarUI;
+	int windowType;
 	QLabel *icon;                    // 标题栏图标;
 	QLabel *titleContentPtr;            // 标题栏内容;
-	QPushButton *btMin;          // 最小化按钮;
-	QPushButton *btRestore;      // 最大化还原按钮;
-	QPushButton *btMax;          // 最大化按钮;
-	QPushButton *btClose;        // 关闭按钮;
+	QPushButton *btMinSimpleBar;          // 最小化按钮;
+	QPushButton *btRestoreSimpleBar;      // 最大化还原按钮;
+	QPushButton *btMaxSimpleBar;          // 最大化按钮;
+	QPushButton *btCloseSimpleBar;        // 关闭按钮;
 
 	// 标题栏背景色;
 	int m_colorR;

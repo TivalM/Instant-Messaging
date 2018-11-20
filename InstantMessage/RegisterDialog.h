@@ -1,6 +1,6 @@
 ﻿#ifndef REGISTERDIALOG_H
 #define REGISTERDIALOG_H
-
+#pragma once
 #include "BaseWindow.h"
 namespace Ui
 {
@@ -22,6 +22,7 @@ private slots:
 
 signals:
 	void showLogin();
+	void hideLogin();
 
 private:
 	Ui::RegisterDialog *ui;
