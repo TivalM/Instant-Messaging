@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/src">
+        <file>image/head.png</file>
+        <file>image/login_background.png</file>
+        <file>image/user.png</file>
+        <file>image/close.svg</file>
+        <file>image/min.svg</file>
+        <file>image/lock.png</file>
+        <file>image/confirm.png</file>
+        <file>image/mail.png</file>
+        <file>image/max.png</file>
+        <file>image/restore.png</file>
+        <file>image/ring.png</file>
+        <file>image/chat.png</file>
+        <file>image/friend.png</file>
+        <file>image/tool.png</file>
+        <file>image/add.png</file>
+    </qresource>
+</RCC>
