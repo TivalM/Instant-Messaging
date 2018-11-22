@@ -228,12 +228,19 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:2px solid ;
+        <string notr="true">QPushButton
+{border:2px solid ;
 border-color: rgb(83, 152, 255);
-border-radius:10px; 
 color: rgb(255, 255, 255);
+border-radius:10px; 
 background-color:rgb(159, 130, 255)
-</string>
+}
+QPushButton:pressed
+{border:none;
+color: rgb(255, 255, 255);
+border-radius:10px; 
+background-color:rgb(223, 184, 255)
+}</string>
        </property>
        <property name="text">
         <string>注册</string>
@@ -443,12 +450,19 @@ background-color:rgb(159, 130, 255)
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:2px solid ;
+        <string notr="true">QPushButton
+{border:2px solid ;
 border-color: rgb(83, 152, 255);
 color: rgb(255, 255, 255);
 border-radius:10px; 
 background-color:rgb(159, 130, 255)
-</string>
+}
+QPushButton:pressed
+{border:none;
+color: rgb(255, 255, 255);
+border-radius:10px; 
+background-color:rgb(223, 184, 255)
+}</string>
        </property>
        <property name="text">
         <string>登陆</string>

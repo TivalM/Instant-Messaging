@@ -32,7 +32,10 @@ SOURCES += \
     RegisterDialog.cpp \
     MainDialog.cpp \
     SessionForm.cpp \
-    PerPersonForm.cpp
+    PerPersonForm.cpp \
+    User.cpp \
+    Message.cpp \
+    MainSystem.cpp
 
 HEADERS += \
         LoginDialog.h \
@@ -41,7 +44,10 @@ HEADERS += \
     RegisterDialog.h \
     MainDialog.h \
     SessionForm.h \
-    PerPersonForm.h
+    PerPersonForm.h \
+    User.h \
+    Message.h \
+    MainSystem.h
 
 FORMS += \
         LoginDialog.ui \

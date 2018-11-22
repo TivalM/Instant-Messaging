@@ -24,6 +24,11 @@ void MainDialog::initTitleBar()
 	titleBarPtr->setBackgroundColor(219, 219, 255);
 }
 
+void MainDialog::loadUser()
+{
+
+}
+
 
 void MainDialog::receiveShow()
 {

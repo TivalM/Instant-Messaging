@@ -17,6 +17,8 @@ class MainDialog : public BaseWindow
 public:
 	explicit MainDialog(QWidget *parent = nullptr, int windowType = 1);
 	void initTitleBar();
+	void loadUser();
+	void updateFriendList();
 	~MainDialog();
 
 private:

@@ -24,8 +24,10 @@ TitleBar::TitleBar(QWidget *parent,  int windowType) :
 	// 初始化;
 	initControl();
 	initConnections();
-	// 加载本地样式 MyTitle.css文件;
-//	loadStyleSheet("MyTitle");
+	// 加载本地样式
+	loadStyleSheet("barButton");
+
+
 }
 
 TitleBar::~TitleBar()
@@ -46,6 +48,11 @@ void TitleBar::initControl()
 		btMaxSimpleBar = new QPushButton;
 		btCloseSimpleBar = new QPushButton;
 
+		btMinSimpleBar->setProperty("style", "btBar");
+		btRestoreSimpleBar->setProperty("style", "btBar");
+		btMaxSimpleBar->setProperty("style", "btBar");
+		btCloseSimpleBar->setProperty("style", "btBar");
+
 		btMinSimpleBar->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
 		btRestoreSimpleBar->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
 		btMaxSimpleBar->setFixedSize(QSize(BUTTON_WIDTH, BUTTON_HEIGHT));
@@ -57,13 +64,10 @@ void TitleBar::initControl()
 		btMaxSimpleBar->setObjectName("ButtonMax");
 		btCloseSimpleBar->setObjectName("ButtonClose");
 
-
-
 		btMinSimpleBar->setToolTip(QStringLiteral("最小化"));
 		btRestoreSimpleBar->setToolTip(QStringLiteral("还原"));
 		btMaxSimpleBar->setToolTip(QStringLiteral("最大化"));
 		btCloseSimpleBar->setToolTip(QStringLiteral("关闭"));
-
 
 		btMinSimpleBar->setFlat(true);
 		btRestoreSimpleBar->setFlat(true);
@@ -107,13 +111,20 @@ void TitleBar::initControl()
 		functionBarUI.btClose->setIcon(QIcon(":/src/image/close.svg"));
 		functionBarUI.btRestore->setIcon(QIcon(":/src/image/restore.png"));
 		functionBarUI.btRing->setIcon(QIcon(":/src/image/ring.png"));
-		functionBarUI.btSessions->setIcon(QIcon(":/src/image/chat.png"));
+		functionBarUI.btSessions->setIcon(QIcon(":/src/image/chat.svg"));
+		functionBarUI.btSessions->setIconSize(QSize(30, 30));
 		functionBarUI.btFriends->setIcon(QIcon(":/src/image/friend.png"));
+		functionBarUI.btFriends->setIconSize(QSize(30, 30));
 		functionBarUI.btTool->setIcon(QIcon(":/src/image/tool.png"));
+		functionBarUI.btTool->setIconSize(QSize(30, 30));
 		functionBarUI.btAdd->setIcon(QIcon(":/src/image/add.png"));
 
-		this->setFixedHeight(50);
+		this->setFixedHeight(55);
 		this->setWindowFlags(Qt::FramelessWindowHint);
+
+		//载入头像
+		functionBarUI.headImg->setPixmap(QPixmap(":/src/image/head.png"));
+		functionBarUI.headImg->setScaledContents(true);
 	}
 }
 
@@ -141,25 +152,6 @@ void TitleBar::setBackgroundColor(int r, int g, int b, bool isTransparent)
 	m_colorG = g;
 	m_colorB = b;
 	m_isTransparent = isTransparent;
-	QString css = QString("background-color: rgb(%1,%2,%3);").arg(r).arg(g).arg(b).append("border:none");
-
-	//设置按钮背景色
-	if (windowType == 0) {
-		btMinSimpleBar->setStyleSheet(css);
-		btRestoreSimpleBar->setStyleSheet(css);
-		btMaxSimpleBar->setStyleSheet(css);
-		btCloseSimpleBar->setStyleSheet(css);
-	} else {
-		functionBarUI.btMin->setStyleSheet(css);
-		functionBarUI.btRestore->setStyleSheet(css);
-		functionBarUI.btMax->setStyleSheet(css);
-		functionBarUI.btClose->setStyleSheet(css);
-		functionBarUI.btRing->setStyleSheet(css);
-		functionBarUI.btSessions->setStyleSheet(css);
-		functionBarUI.btFriends->setStyleSheet(css);
-		functionBarUI.btTool->setStyleSheet(css);
-	}
-	// 重新绘制（调用paintEvent事件）;
 	update();
 }
 
@@ -268,7 +260,7 @@ void TitleBar::paintEvent(QPaintEvent *event)
 	QWidget::paintEvent(event);
 }
 
-// 双击响应事件，主要是实现双击标题栏进行最大化和最小化操作;
+// 双击响应事件，实现双击标题栏进行最大化和最小化操作;
 void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
 {
 	if (windowType == 0) {
@@ -336,13 +328,14 @@ void TitleBar::mouseReleaseEvent(QMouseEvent *event)
 // 可以将样式直接写在文件中，程序运行时直接加载进来;
 void TitleBar::loadStyleSheet(const QString &sheetName)
 {
-	QFile file(":/Resources/" + sheetName + ".css");
+	QFile file("G:\\GitHub\\Instant-Messaging\\InstantMessage\\css\\" + sheetName + ".css");
 	file.open(QFile::ReadOnly);
 	if (file.isOpen()) {
 		QString styleSheet = this->styleSheet();
 		styleSheet += QLatin1String(file.readAll());
 		this->setStyleSheet(styleSheet);
-	}
+	} else
+		qDebug() << "No such file";
 }
 
 // 以下为按钮操作响应的槽;

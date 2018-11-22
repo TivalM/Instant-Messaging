@@ -1,0 +1,19 @@
+QPushButton[style="btBar"]{
+	background-color: rgb(219,219,255);
+	border: none;
+}
+
+QPushButton[style="btBar"]:hover{
+	background-color: rgb(253, 255, 204);
+	border: none;
+}
+
+QPushButton:pressed{
+	background-color: rgb(219, 219, 255);
+	border: none;
+}
+
+QPushButton[style="btBar"]:pressed{
+	background-color: rgb(255, 204, 255);
+	border: none;
+}

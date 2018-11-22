@@ -11,9 +11,12 @@
         <file>image/max.png</file>
         <file>image/restore.png</file>
         <file>image/ring.png</file>
-        <file>image/chat.png</file>
         <file>image/friend.png</file>
         <file>image/tool.png</file>
         <file>image/add.png</file>
+        <file>image/chat.svg</file>
+        <file>image/head2.png</file>
+        <file>image/down.png</file>
+        <file>image/up.png</file>
     </qresource>
 </RCC>
