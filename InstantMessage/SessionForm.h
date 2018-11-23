@@ -3,6 +3,7 @@
 #pragma once
 #include <QWidget>
 #include <QListWidgetItem>
+#include <QFile>
 #include "PerPersonForm.h"
 #include "ChatForm.h"
 namespace Ui
@@ -19,6 +20,7 @@ public:
 	void initial();
 	void refreshFriends();  //根据系统好友列表申请信息
 	void addOneFriend(int i, QPixmap img, QString name, QString motto = "");   //应当接受参数
+	void loadStyleSheet(const QString &sheetName);
 	~SessionForm();
 
 private:
@@ -28,10 +30,10 @@ private:
 
 
 	// 初始化控件;
-	void initControl();
+//	void initControl();
 
 private slots:
-	void on_btSend_clicked();
+//	void on_btSend_clicked();
 };
 
 #endif // SESSIONFORM_H
