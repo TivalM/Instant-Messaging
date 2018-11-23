@@ -15,6 +15,7 @@ class ChatForm : public QWidget
 public:
 	explicit ChatForm(QWidget *parent = nullptr);
 	void initControl();
+	void on_pushButton_14_clicked();
 	~ChatForm();
 
 private slots:
@@ -22,9 +23,6 @@ private slots:
 
 private:
 	Ui::ChatForm *ui;
-
-private slots:
-	void on_btSend_clicked();
 };
 
 #endif // CHATFORM_H

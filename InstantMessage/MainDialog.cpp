@@ -12,6 +12,7 @@ MainDialog::MainDialog(QWidget *parent, int windowType) :
 	sessionForm = new SessionForm(this);
 	contactForm = new ContactForm(this);
 	toolsForm = new ToolsForm(this);
+	this->loadStyleSheet("friendList");
 }
 
 MainDialog::~MainDialog()

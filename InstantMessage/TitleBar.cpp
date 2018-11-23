@@ -25,7 +25,7 @@ TitleBar::TitleBar(QWidget *parent,  int windowType) :
 	initControl();
 	initConnections();
 	// 加载本地样式
-	loadStyleSheet("BarButton");
+	loadStyleSheet("barButton");
 }
 
 TitleBar::~TitleBar()

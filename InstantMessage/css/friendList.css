@@ -1,4 +1,4 @@
-QListWidget{border:none; background:rgba(0, 0, 0, 5%);outline:0px;}
+QListWidget{border:none; background:rgba(0, 0, 0, 3%);outline:0px;}
 QListWidget::item:hover{background:rgba(0, 0, 0, 7%); }
 QListWidget::item:selected{background:rgba(0, 0, 0, 15%);}
 QListWidget::item:selected:!active{background:rgb(203, 203, 203); }
@@ -52,14 +52,3 @@ QScrollBar::up-arrow:vertical{
     height:30px;
     border-image:url(:/src/image/down.png);
 }
-
-QPushButton:hover{
-    background-color: rgb(253, 255, 204);
-    border: none;
-}
-
-QPushButton:pressed{
-    background-color: rgb(219, 219, 255);
-    border: none;
-}
-
