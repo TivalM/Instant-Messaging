@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.7.2, 2018-11-23T14:40:26. -->
+=======
+<!-- Written by QtCreator 4.7.2, 2018-11-23T11:38:47. -->
+>>>>>>> parent of 03bafaa... Revert "聊天框update"
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>

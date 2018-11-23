@@ -32,9 +32,6 @@ protected:
 	TitleBar *titleBarPtr;
 	void resizeEvent(QResizeEvent *event);
 	void loadStyleSheet(const QString &sheetName);
-
-
-
 };
 
 #endif // BASECLASS_H
