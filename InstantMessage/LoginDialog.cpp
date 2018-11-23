@@ -35,7 +35,7 @@ LoginDialog::~LoginDialog()
 
 void LoginDialog::initTitleBar()
 {
-	titleBarPtr->setButtonType(MIN_MAX_BUTTON);
+	titleBarPtr->setButtonType(MIN_BUTTON);
 	titleBarPtr->setTitleWidth(this->width());
 	titleBarPtr->setBackgroundColor(219, 219, 255);
 }

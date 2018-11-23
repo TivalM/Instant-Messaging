@@ -27,3 +27,8 @@ PerPersonForm::~PerPersonForm()
 {
 	delete ui;
 }
+
+QString PerPersonForm::getName() const
+{
+	return name;
+}

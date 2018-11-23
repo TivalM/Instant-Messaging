@@ -19,7 +19,7 @@ public:
 private:
 	void initTitleBar(int type);
 	void paintEvent(QPaintEvent *event);
-	void loadStyleSheet(const QString &sheetName);
+
 
 
 private slots:
@@ -31,6 +31,7 @@ private slots:
 protected:
 	TitleBar *titleBarPtr;
 	void resizeEvent(QResizeEvent *event);
+	void loadStyleSheet(const QString &sheetName);
 
 
 

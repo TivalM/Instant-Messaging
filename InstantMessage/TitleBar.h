@@ -44,6 +44,9 @@ public:
 	// 保存/获取 最大化前窗口的位置及大小;
 	void saveRestoreInfo(const QPoint point, const QSize size);
 	void getRestoreInfo(QPoint &point, QSize &size);
+	// 加载样式文件;
+	void loadStyleSheet(const QString &sheetName);
+	Ui::FunctionTitleBar *getUI();
 
 private:
 	void paintEvent(QPaintEvent *event);
@@ -56,8 +59,7 @@ private:
 	void initControl();
 	// 信号槽的绑定;
 	void initConnections();
-	// 加载样式文件;
-	void loadStyleSheet(const QString &sheetName);
+
 
 signals:
 	// 按钮触发的信号;
@@ -74,9 +76,10 @@ private slots:
 	void onButtonCloseClicked();
 	void onRollTitle();
 
-private:
+protected:
 	QWidget *barForm;
 	Ui::FunctionTitleBar functionBarUI;
+private:
 	int windowType;
 	QLabel *icon;                    // 标题栏图标;
 	QLabel *titleContentPtr;            // 标题栏内容;

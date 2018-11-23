@@ -5,6 +5,9 @@
 #include <QStackedWidget>
 #include "BaseWindow.h"
 #include "SessionForm.h"
+#include "ContactForm.h"
+#include "ToolsForm.h"
+
 namespace Ui
 {
 class MainDialog;
@@ -19,14 +22,21 @@ public:
 	void initTitleBar();
 	void loadUser();
 	void updateFriendList();
+	//信号连接暂不可用，手写切换函数
+
 	~MainDialog();
 
 private:
 	Ui::MainDialog *ui;
-	QWidget *sessionForm;           //会话页面
+	SessionForm *sessionForm;   //会话页面
+	ContactForm *contactForm;   //联系人界面
+	ToolsForm *toolsForm;       //工具箱界面
 
 private slots:
 	void receiveShow();     //收到由其它界面发送的信号时，该页面自主显示
+	void switchToSession();
+	void switchToContact();
+	void switchToTool();
 };
 
 #endif // MAINDIALOG_H

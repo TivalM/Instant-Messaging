@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QListWidgetItem>
 #include "PerPersonForm.h"
+#include "ChatForm.h"
 namespace Ui
 {
 class SessionForm;
@@ -22,7 +23,15 @@ public:
 
 private:
 	Ui::SessionForm *ui;
+	ChatForm *chatForm;
 	PerPersonForm *formList[20];
+
+
+	// 初始化控件;
+	void initControl();
+
+private slots:
+	void on_btSend_clicked();
 };
 
 #endif // SESSIONFORM_H

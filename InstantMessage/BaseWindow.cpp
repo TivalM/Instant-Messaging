@@ -8,12 +8,14 @@ BaseWindow::BaseWindow(QWidget *parent, int windowType) :
 	// WindowMinimizeButtonHint 属性设置在窗口最小化时，点击任务栏窗口可以显示出原窗口;
 	this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint);
 	sizePolicy();
+
 	// 设置窗口背景透明;
 	//  setAttribute(Qt::WA_TranslucentBackground);
 
 	// 注意！！！如果是主窗口不要设置WA_DeleteOnClose属性;
 	// 关闭窗口时释放资源;
 	//  setAttribute(Qt::WA_DeleteOnClose);
+
 	// 初始化标题栏;
 	initTitleBar(windowType);
 }
@@ -50,13 +52,14 @@ void BaseWindow::paintEvent(QPaintEvent *event)
 
 void BaseWindow::loadStyleSheet(const QString &sheetName)
 {
-	QFile file(":/Resources/" + sheetName + ".css");
+	QFile file("G:\\GitHub\\Instant-Messaging\\InstantMessage\\css\\" + sheetName + ".css");
 	file.open(QFile::ReadOnly);
 	if (file.isOpen()) {
 		QString styleSheet = this->styleSheet();
 		styleSheet += QLatin1String(file.readAll());
 		this->setStyleSheet(styleSheet);
-	}
+	} else
+		qDebug() << "No such file";
 }
 
 void BaseWindow::onButtonMinClicked()

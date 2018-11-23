@@ -19,6 +19,8 @@ public:
 
 	~PerPersonForm();
 
+	QString getName() const;
+
 private:
 	QPixmap headImg;
 	QString name;

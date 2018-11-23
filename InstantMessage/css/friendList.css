@@ -1,0 +1,54 @@
+QListWidget{border:none; background:rgba(0, 0, 0, 3%);outline:0px;}
+QListWidget::item:hover{background:rgba(0, 0, 0, 7%); }
+QListWidget::item:selected{background:rgba(0, 0, 0, 15%);}
+QListWidget::item:selected:!active{background:rgb(203, 203, 203); }
+
+QScrollBar::vertical{
+    width:10px;
+    background:rgba(0, 0, 0, 0%);
+    margin:0px,0px,0px,0px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+QScrollBar::handle:vertical{
+    background:rgba(0,0,0,20%);
+    border-radius:5px;
+    min-height:20px;
+}
+
+QScrollBar::handle:hover{
+    background:rgba(0,0,0,25%);   
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background:none;
+}
+
+QScrollBar::add-line:vertical {
+    border:none;
+    height: 10px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical {
+    border:none;
+    height: 10px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical{
+    border:0px;
+    width:30px;
+    height:30px;
+    border-image:url(:/src/image/up.png);
+}
+
+ QScrollBar::down-arrow:vertical {
+    border:0px;
+    width:30px;
+    height:30px;
+    border-image:url(:/src/image/down.png);
+}

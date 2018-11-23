@@ -35,7 +35,10 @@ SOURCES += \
     PerPersonForm.cpp \
     User.cpp \
     Message.cpp \
-    MainSystem.cpp
+    MainSystem.cpp \
+    ToolsForm.cpp \
+    ContactForm.cpp \
+    ChatForm.cpp
 
 HEADERS += \
         LoginDialog.h \
@@ -47,7 +50,10 @@ HEADERS += \
     PerPersonForm.h \
     User.h \
     Message.h \
-    MainSystem.h
+    MainSystem.h \
+    ToolsForm.h \
+    ContactForm.h \
+    ChatForm.h
 
 FORMS += \
         LoginDialog.ui \
@@ -55,7 +61,10 @@ FORMS += \
     MainDialog.ui \
     SessionForm.ui \
     PerPersonForm.ui \
-    FunctionTitleBar.ui
+    FunctionTitleBar.ui \
+    ToolsForm.ui \
+    CharHeadForm.ui \
+    ChatForm.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -26,8 +26,6 @@ TitleBar::TitleBar(QWidget *parent,  int windowType) :
 	initConnections();
 	// 加载本地样式
 	loadStyleSheet("barButton");
-
-
 }
 
 TitleBar::~TitleBar()
@@ -235,6 +233,11 @@ void TitleBar::getRestoreInfo(QPoint &point, QSize &size)
 {
 	point = m_restorePos;
 	size = m_restoreSize;
+}
+
+Ui::FunctionTitleBar *TitleBar::getUI()
+{
+	return &functionBarUI;
 }
 
 // 绘制标题栏背景色;
