@@ -25,46 +25,49 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        LoginDialog.cpp \
-    TitleBar.cpp \
-    BaseWindow.cpp \
-    RegisterDialog.cpp \
-    MainDialog.cpp \
-    SessionForm.cpp \
-    PerPersonForm.cpp \
-    User.cpp \
-    Message.cpp \
+    components/BaseWindow.cpp \
+    components/ChatForm.cpp \
+    components/TitleBar.cpp \
+    pages/ContactForm.cpp \
+    pages/LoginDialog.cpp \
+    pages/MainDialog.cpp \
+    pages/RegisterDialog.cpp \
+    pages/SessionForm.cpp \
+    pages/ToolsForm.cpp \
+    main.cpp \
     MainSystem.cpp \
-    ToolsForm.cpp \
-    ContactForm.cpp \
-    ChatForm.cpp
+    Message.cpp \
+    User.cpp \
+    pages/PersonInfoForm.cpp \
+    components/ListItemForm.cpp
 
 HEADERS += \
-        LoginDialog.h \
-    TitleBar.h \
-    BaseWindow.h \
-    RegisterDialog.h \
-    MainDialog.h \
-    SessionForm.h \
-    PerPersonForm.h \
-    User.h \
-    Message.h \
+    components/BaseWindow.h \
+    components/ChatForm.h \
+    components/TitleBar.h \
+    pages/ContactForm.h \
+    pages/LoginDialog.h \
+    pages/MainDialog.h \
+    pages/PersonInfoForm.h \
+    pages/RegisterDialog.h \
+    pages/SessionForm.h \
+    pages/ToolsForm.h \
     MainSystem.h \
-    ToolsForm.h \
-    ContactForm.h \
-    ChatForm.h
+    Message.h \
+    User.h \
+    components/ListItemForm.h
 
 FORMS += \
-        LoginDialog.ui \
-    RegisterDialog.ui \
-    MainDialog.ui \
-    SessionForm.ui \
-    PerPersonForm.ui \
-    FunctionTitleBar.ui \
-    ToolsForm.ui \
-    CharHeadForm.ui \
-    ChatForm.ui
+    components/ChatForm.ui \
+    pages/LoginDialog.ui \
+    pages/MainDialog.ui \
+    pages/RegisterDialog.ui \
+    pages/SessionForm.ui \
+    pages/ToolsForm.ui \
+    components/FunctionTitleBar.ui \
+    pages/PersonInfoForm.ui \
+    components/CharHeadForm.ui \
+    components/ListItemForm.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -72,4 +75,45 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    src.qrc \
     src.qrc
+
+SUBDIRS += \
+    InstantMessage.pro
+
+DISTFILES += \
+    image/add.png \
+    image/confirm.png \
+    image/down.png \
+    image/emoji.png \
+    image/file.png \
+    image/friend.png \
+    image/head.png \
+    image/head2.png \
+    image/head3.png \
+    image/head4.png \
+    image/head5.png \
+    image/head6.png \
+    image/head7.png \
+    image/head8.png \
+    image/history.png \
+    image/img.png \
+    image/lock.png \
+    image/login_background.png \
+    image/mail.png \
+    image/max.png \
+    image/more.png \
+    image/peerInfo.png \
+    image/recording.png \
+    image/restore.png \
+    image/ring.png \
+    image/send.png \
+    image/tool.png \
+    image/up.png \
+    image/user.png \
+    image/头像1_u110.png \
+    image/chat.svg \
+    image/close.svg \
+    image/min.svg \
+    css/BarButton.css \
+    css/SessionForm.css

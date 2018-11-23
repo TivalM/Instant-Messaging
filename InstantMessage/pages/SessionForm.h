@@ -4,8 +4,10 @@
 #include <QWidget>
 #include <QListWidgetItem>
 #include <QFile>
-#include "PerPersonForm.h"
-#include "ChatForm.h"
+#include <vector>
+#include "components/ListItemForm.h"
+#include "components/ChatForm.h"
+
 namespace Ui
 {
 class SessionForm;
@@ -18,15 +20,15 @@ class SessionForm : public QWidget
 public:
 	explicit SessionForm(QWidget *parent = nullptr);
 	void initial();
+	void createOneFriendForm(int userid, QPixmap img, QString name);
 	void refreshFriends();  //根据系统好友列表申请信息
-	void addOneFriend(int i, QPixmap img, QString name, QString motto = "");   //应当接受参数
-	void loadStyleSheet(const QString &sheetName);
+	void addAllFriendsIntoList();
 	~SessionForm();
 
 private:
 	Ui::SessionForm *ui;
 	ChatForm *chatForm;
-	PerPersonForm *formList[20];
+	std::vector<ListItemForm *> sessionFormList;
 
 
 	// 初始化控件;

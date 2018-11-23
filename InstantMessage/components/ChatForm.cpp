@@ -1,4 +1,4 @@
-﻿#include "ChatForm.h"
+﻿#include "components/ChatForm.h"
 #include "ui_ChatForm.h"
 #include <qdebug.h>
 ChatForm::ChatForm(QWidget *parent) :
@@ -7,6 +7,7 @@ ChatForm::ChatForm(QWidget *parent) :
 {
 	ui->setupUi(this);
 	initControl();
+
 }
 
 ChatForm::~ChatForm()
@@ -24,12 +25,17 @@ void ChatForm::initControl()
 	ui->btFile->setIcon(QIcon(":/src/image/file.png"));
 	ui->btHistory->setIcon(QIcon(":/src/image/history.png"));
 	ui->btSend->setIcon(QIcon(":/src/image/send.png"));
+}
+
+void ChatForm::freshInfo()
+{
 
 }
 
 //2
 void ChatForm::on_btSend_clicked()
 {
+	//这一部分将文本显示到窗口上
 	QString content = ui->textEdit->toPlainText();    qDebug() << content.length();
 	if (content.length() >= 3) {
 		qDebug() << "进入了这个";

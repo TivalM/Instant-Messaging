@@ -32,5 +32,7 @@
         <file>image/peerInfo.png</file>
         <file>image/recording.png</file>
         <file>image/send.png</file>
+        <file>css/BarButton.css</file>
+        <file>css/SessionForm.css</file>
     </qresource>
 </RCC>

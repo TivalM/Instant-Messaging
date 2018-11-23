@@ -1,4 +1,4 @@
-﻿#include "BaseWindow.h"
+﻿#include "components/BaseWindow.h"
 
 
 BaseWindow::BaseWindow(QWidget *parent, int windowType) :

@@ -1,4 +1,4 @@
-﻿#include "TitleBar.h"
+﻿#include "components/TitleBar.h"
 #include <QHBoxLayout>
 #include <QPainter>
 #include <QFile>

@@ -33,7 +33,7 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="2,15,1,5,2">
+    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,17,1,6,2">
      <property name="spacing">
       <number>0</number>
      </property>
@@ -103,11 +103,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="minimumSize">
-          <size>
-           <width>548</width>
-           <height>340</height>
-          </size>
+         <property name="font">
+          <font>
+           <family>等线</family>
+           <pointsize>12</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgba(0, 0, 0, 2%);
@@ -208,6 +208,12 @@ border: none;</string>
            <width>514</width>
            <height>0</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>等线</family>
+           <pointsize>12</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgba(255, 255, 255, 3%);

@@ -1,5 +1,5 @@
-﻿#include "MainDialog.h"
-#include "BaseWindow.h"
+﻿#include "pages/MainDialog.h"
+#include "components/BaseWindow.h"
 #include "ui_MainDialog.h"
 
 MainDialog::MainDialog(QWidget *parent, int windowType) :

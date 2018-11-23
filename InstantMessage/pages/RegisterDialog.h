@@ -1,7 +1,7 @@
 ﻿#ifndef REGISTERDIALOG_H
 #define REGISTERDIALOG_H
 #pragma once
-#include "BaseWindow.h"
+#include "components/BaseWindow.h"
 namespace Ui
 {
 class RegisterDialog;

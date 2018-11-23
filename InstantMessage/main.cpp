@@ -1,6 +1,6 @@
-﻿#include "LoginDialog.h"
-#include "RegisterDialog.h"
-#include "MainDialog.h"
+﻿#include "pages/LoginDialog.h"
+#include "pages/RegisterDialog.h"
+#include "pages/MainDialog.h"
 #include "ui_FunctionTitleBar.h"
 int main(int argc, char *argv[])
 {

@@ -3,7 +3,7 @@
 #pragma once
 #include <QDialog>
 #include <QStackedWidget>
-#include "BaseWindow.h"
+#include "components/BaseWindow.h"
 #include "SessionForm.h"
 #include "ContactForm.h"
 #include "ToolsForm.h"
@@ -31,6 +31,7 @@ private:
 	SessionForm *sessionForm;   //会话页面
 	ContactForm *contactForm;   //联系人界面
 	ToolsForm *toolsForm;       //工具箱界面
+
 
 private slots:
 	void receiveShow();     //收到由其它界面发送的信号时，该页面自主显示

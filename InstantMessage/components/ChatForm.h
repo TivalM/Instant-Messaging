@@ -15,6 +15,7 @@ class ChatForm : public QWidget
 public:
 	explicit ChatForm(QWidget *parent = nullptr);
 	void initControl();
+	void freshInfo();
 	~ChatForm();
 
 private slots:

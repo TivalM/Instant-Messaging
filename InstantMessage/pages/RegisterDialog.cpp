@@ -1,4 +1,4 @@
-﻿#include "RegisterDialog.h"
+﻿#include "pages/RegisterDialog.h"
 #include "ui_RegisterDialog.h"
 
 RegisterDialog::RegisterDialog(QWidget *parent) :
