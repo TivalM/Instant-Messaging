@@ -11,9 +11,28 @@
         <file>image/max.png</file>
         <file>image/restore.png</file>
         <file>image/ring.png</file>
-        <file>image/chat.png</file>
         <file>image/friend.png</file>
         <file>image/tool.png</file>
         <file>image/add.png</file>
+        <file>image/chat.svg</file>
+        <file>image/head2.png</file>
+        <file>image/down.png</file>
+        <file>image/up.png</file>
+        <file>image/head3.png</file>
+        <file>image/head4.png</file>
+        <file>image/head5.png</file>
+        <file>image/head6.png</file>
+        <file>image/head7.png</file>
+        <file>image/head8.png</file>
+        <file>image/emoji.png</file>
+        <file>image/file.png</file>
+        <file>image/history.png</file>
+        <file>image/img.png</file>
+        <file>image/more.png</file>
+        <file>image/peerInfo.png</file>
+        <file>image/recording.png</file>
+        <file>image/send.png</file>
+        <file>css/BarButton.css</file>
+        <file>css/SessionForm.css</file>
     </qresource>
 </RCC>
