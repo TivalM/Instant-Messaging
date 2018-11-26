@@ -26,7 +26,6 @@ CONFIG += c++11
 
 SOURCES += \
     components/BaseWindow.cpp \
-    components/ChatForm.cpp \
     components/TitleBar.cpp \
     pages/ContactForm.cpp \
     pages/LoginDialog.cpp \
@@ -39,11 +38,11 @@ SOURCES += \
     Message.cpp \
     User.cpp \
     pages/PersonInfoForm.cpp \
-    components/ListItemForm.cpp
+    components/ListItemForm.cpp \
+    components/ChatForm.cpp
 
 HEADERS += \
     components/BaseWindow.h \
-    components/ChatForm.h \
     components/TitleBar.h \
     pages/ContactForm.h \
     pages/LoginDialog.h \
@@ -55,10 +54,10 @@ HEADERS += \
     MainSystem.h \
     Message.h \
     User.h \
-    components/ListItemForm.h
+    components/ListItemForm.h \
+    components/ChatForm.h
 
 FORMS += \
-    components/ChatForm.ui \
     pages/LoginDialog.ui \
     pages/MainDialog.ui \
     pages/RegisterDialog.ui \
@@ -66,8 +65,8 @@ FORMS += \
     pages/ToolsForm.ui \
     components/FunctionTitleBar.ui \
     pages/PersonInfoForm.ui \
-    components/CharHeadForm.ui \
-    components/ListItemForm.ui
+    components/ListItemForm.ui \
+    components/ChatForm.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

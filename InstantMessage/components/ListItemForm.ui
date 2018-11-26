@@ -43,6 +43,14 @@
        <height>45</height>
       </size>
      </property>
+     <property name="font">
+      <font>
+       <family>等线</family>
+       <pointsize>15</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
       <string/>
      </property>
