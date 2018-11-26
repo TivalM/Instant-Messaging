@@ -7,7 +7,6 @@
 #include <QFile>
 #include "pages/PersonInfoForm.h"
 #include "ui_SessionForm.h"
-#include "ui_CharHeadForm.h"
 #include "components/ListItemForm.h"
 
 namespace Ui

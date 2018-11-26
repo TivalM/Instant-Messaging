@@ -34,5 +34,6 @@
         <file>image/send.png</file>
         <file>css/BarButton.css</file>
         <file>css/SessionForm.css</file>
+        <file>image/toolOne.png</file>
     </qresource>
 </RCC>

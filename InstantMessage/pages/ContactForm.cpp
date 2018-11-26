@@ -1,10 +1,12 @@
 ﻿#include "pages/ContactForm.h"
-
+#include "ui_ListItemForm.h"
+#include <QDebug>
 ContactForm::ContactForm(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::SessionForm)
 {
 	ui->setupUi(this);
+	//在右边插入信息页，该信息页随着选择的联系人的不同而刷新
 	personInfoForm = new PersonInfoForm();
 	ui->horizontalLayout->addWidget(personInfoForm);
 	ui->list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -65,14 +67,16 @@ void ContactForm::addAllFriendsIntoList()
 			QListWidgetItem *header = nullptr;
 
 			QWidget *w = new QWidget();
-			Ui::CharHeadForm *charForm = new Ui::CharHeadForm();
+//			Ui::CharHeadForm *charForm = new Ui::CharHeadForm();
+			//重构时应使用位置表达label
+			Ui::ListItemForm *charForm = new Ui::ListItemForm();
 			charForm->setupUi(w);
-
-			charForm->labelCharHead->setText(QString(" ").append(divide));
+			charForm->labelImg->setText(divide);
 			header = new QListWidgetItem(ui->list);
 			header->setSizeHint(QSize(ui->list->width(), 35));
+
 			ui->list->addItem(header);
-			ui->list->setItemWidget(header, charForm->labelCharHead);
+			ui->list->setItemWidget(header, w);
 		}
 		//    layout->add
 		QListWidgetItem *aitem = new QListWidgetItem(ui->list);
@@ -86,17 +90,17 @@ void ContactForm::addAllFriendsIntoList()
 void ContactForm::sortFriends()
 {
 	//按字典序比较并排序
-	unsigned int i, j;
+	//转为unsigned int可以解除警告
+	int i, j;
 	ListItemForm *temp = nullptr;
 	for (i = 1; i < 7; i++) {
 		temp = friendFormList.at(i);
 		j = i - 1;
-		while (j > 0 && friendFormList.at(j)->getName() > temp->getName()) {
+		while (j >= 0 && friendFormList.at(j)->getName() > temp->getName()) {
 			friendFormList.at(j + 1) = friendFormList.at(j);
 			j--;
 		}
-		if (j != i - 1)
-			friendFormList.at(j + 1) = temp;
+		friendFormList.at(j + 1) = temp;
 	}
 }
 

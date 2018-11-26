@@ -5,6 +5,7 @@ ListItemForm::ListItemForm(QWidget *parent, int userId, QPixmap img, QString nam
 	QWidget(parent),
 	ui(new Ui::ListItemForm)
 {
+	//要贯彻UI与数据分离的原则，重构时应使用id表示Item，将数据剥除
 	ui->setupUi(this);
 	this->headImg = img;
 	this->name = name;
