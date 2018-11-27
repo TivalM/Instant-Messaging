@@ -7,7 +7,6 @@ class Message
 {
 public:
 	Message();
-
 	int getIdSender() const;
 	QTime getDate() const;
 	QString getType() const;
@@ -19,7 +18,6 @@ private:
 	QTime date;
 	QString type;
 	QString content;
-	int belongsToSession;
 };
 
 #endif // MESSAGE_H

@@ -39,7 +39,8 @@ SOURCES += \
     User.cpp \
     pages/PersonInfoForm.cpp \
     components/ListItemForm.cpp \
-    components/ChatForm.cpp
+    components/ChatForm.cpp \
+    Session.cpp
 
 HEADERS += \
     components/BaseWindow.h \
@@ -55,7 +56,8 @@ HEADERS += \
     Message.h \
     User.h \
     components/ListItemForm.h \
-    components/ChatForm.h
+    components/ChatForm.h \
+    Session.h
 
 FORMS += \
     pages/LoginDialog.ui \

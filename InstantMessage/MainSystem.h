@@ -2,7 +2,8 @@
 #define MAINSYSTEM_H
 #include "User.h"
 #include "Message.h"
-
+#include "Session.h"
+#include <vector>
 
 class MainSystem
 {
@@ -12,7 +13,8 @@ public:
 private:
 	static MainSystem *instance;
 	User *systemUser;
-	int *userFriends;
+	std::vector<User> friends;     //登陆用户的好友列表
+	std::vector<Session> sessions;  //登陆用户的会话列表
 	int *sessionList;
 
 };

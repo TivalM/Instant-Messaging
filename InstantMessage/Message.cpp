@@ -24,8 +24,3 @@ QString Message::getContent() const
 {
 	return content;
 }
-
-int Message::getBelongsToSession() const
-{
-	return belongsToSession;
-}
