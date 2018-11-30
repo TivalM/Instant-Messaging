@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+QT += websockets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = InstantMessage
@@ -40,7 +40,8 @@ SOURCES += \
     pages/PersonInfoForm.cpp \
     components/ListItemForm.cpp \
     components/ChatForm.cpp \
-    Session.cpp
+    Session.cpp \
+    ClientCore.cpp
 
 HEADERS += \
     components/BaseWindow.h \
@@ -57,7 +58,8 @@ HEADERS += \
     User.h \
     components/ListItemForm.h \
     components/ChatForm.h \
-    Session.h
+    Session.h \
+    ClientCore.h
 
 FORMS += \
     pages/LoginDialog.ui \

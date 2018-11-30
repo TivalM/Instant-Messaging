@@ -8,8 +8,13 @@ class Session
 {
 public:
 	Session();
+	Session(int id);
+	std::vector<Message> getMessages() const;
+	int insertMessage(int idSender, QTime date, QString type, QByteArray content);
+	int getSessionId() const;
 
 private:
+	int sessionId;
 	std::vector<Message> messages;
 };
 

@@ -23,13 +23,13 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
 	ui->editName->addAction(QIcon(":/src/image/user.png"), QLineEdit::LeadingPosition);
 	ui->editPassword->addAction(QIcon(":/src/image/lock.png"), QLineEdit::LeadingPosition);
 	ui->editConfirm->addAction(QIcon(":/src/image/confirm.png"), QLineEdit::LeadingPosition);
-	ui->editMailAddress->addAction(QIcon(":/src/image/mail.png"), QLineEdit::LeadingPosition);
+	ui->editNickname->addAction(QIcon(":/src/image/mail.png"), QLineEdit::LeadingPosition);
 
 	//设置输入提示
 	ui->editName->setPlaceholderText(QString::fromLocal8Bit("用户名是唯一的、用于登陆的凭证。"));
 	ui->editPassword->setPlaceholderText(QString::fromLocal8Bit("长度为6至18位，空格会被忽略"));
 	ui->editConfirm->setPlaceholderText(QString::fromLocal8Bit("请重复输入密码"));
-	ui->editMailAddress->setPlaceholderText(QString::fromLocal8Bit("邮箱是用于找回密码的凭证"));
+	ui->editNickname->setPlaceholderText(QString::fromLocal8Bit("邮箱是用于找回密码的凭证"));
 }
 
 void RegisterDialog::initTitleBar()
@@ -57,7 +57,7 @@ void RegisterDialog::on_btRegister_clicked()
 	QString name = ui->editName->text();
 	QString password = ui->editPassword->text();
 	QString confirm = ui->editConfirm->text();
-	QString email = ui->editMailAddress->text();
+	QString nickName = ui->editNickname->text();
 	//判定
 	//MessageBox
 	emit showLogin();

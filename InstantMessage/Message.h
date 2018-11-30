@@ -7,6 +7,7 @@ class Message
 {
 public:
 	Message();
+	Message(int idSender, QTime date, QString type, QByteArray content);
 	int getIdSender() const;
 	QTime getDate() const;
 	QString getType() const;
@@ -17,7 +18,7 @@ private:
 	int idSender;
 	QTime date;
 	QString type;
-	QString content;
+	QByteArray content;
 };
 
 #endif // MESSAGE_H

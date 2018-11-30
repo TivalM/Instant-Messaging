@@ -213,12 +213,12 @@
         </font>
        </property>
        <property name="text">
-        <string>邮箱</string>
+        <string>昵称</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="editMailAddress">
+      <widget class="QLineEdit" name="editNickname">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
