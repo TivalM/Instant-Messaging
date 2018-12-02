@@ -52,11 +52,15 @@ void LoginDialog::on_btRegister_clicked()
 
 void LoginDialog::on_btLogin_clicked()
 {
-	QString userName = ui->editAccount->text().remove(QRegExp("\\s"));  //去除空格
+	QString account = ui->editAccount->text().remove(QRegExp("\\s"));  //去除空格
 	QString password = ui->editPassword->text().remove(QRegExp("\\s"));
-	bool state = true;
 	//进行验证
+	MainSystem *system = MainSystem::getMainSystem();
+	int state = system->login(account, password);
+	if (state == 0) {
+		//若返回0，表示用户信息，会话列表，好友列表均正确初始化
 
+	}
 	//进行验证
 
 	if (!state)

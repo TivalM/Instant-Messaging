@@ -16,9 +16,9 @@ std::vector<Message> Session::getMessages() const
 	return messages;
 }
 
-int Session::insertMessage(int idSender, QTime date, QString type, QByteArray content)
+int Session::insertMessage(int idSender, QString date, QString type, QString content)
 {
-	Message newMessage(idSender, date, type, content);
+	Message newMessage(idSender, QTime::fromString(date), type, content);
 	messages.push_back(newMessage);
 	return 0;
 }
@@ -26,4 +26,9 @@ int Session::insertMessage(int idSender, QTime date, QString type, QByteArray co
 int Session::getSessionId() const
 {
 	return sessionId;
+}
+
+void Session::setSessionId(int id)
+{
+	sessionId = id;
 }

@@ -7,7 +7,8 @@ class Message
 {
 public:
 	Message();
-	Message(int idSender, QTime date, QString type, QByteArray content);
+	//类型待修改
+	Message(int idSender, QTime date, QString type, QString content);
 	int getIdSender() const;
 	QTime getDate() const;
 	QString getType() const;

@@ -10,8 +10,10 @@ public:
 	Session();
 	Session(int id);
 	std::vector<Message> getMessages() const;
-	int insertMessage(int idSender, QTime date, QString type, QByteArray content);
+	int insertMessage(int idSender, QString date, QString type, QString content);
 	int getSessionId() const;
+
+	void setSessionId(int value);
 
 private:
 	int sessionId;

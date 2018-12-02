@@ -37,6 +37,8 @@ int User::loadInfo(int id, QString name, QString area, QPixmap *headImg)
 
 int User::modifyInfo(QString name, QString area)
 {
+	this->nameUser = name;
+	this->area = area;
 	return 0;
 }
 

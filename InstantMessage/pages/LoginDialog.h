@@ -5,6 +5,7 @@
 #include <QTableView>
 #include <QIcon>
 #include <QUrl>
+#include "MainSystem.h"
 #include "components/BaseWindow.h"
 
 namespace Ui

@@ -17,10 +17,13 @@ class ClientCore : public QObject
 public:
 	ClientCore(QObject *parent = nullptr);
 	int initWebSocket(const QUrl &url);
-	QNetworkReply *sentGetRequset(QUrl &url);
+	QNetworkAccessManager *getManager() const;
+	QNetworkReply *sendGetRequset(QUrl &url);
+	QNetworkReply *sendPostRequset(QNetworkRequest postRequest, QByteArray jsonDate);
 	QWebSocket &getWebSocket();
 	QUrl getSocketUrl() const;
-	QNetworkAccessManager *getManager() const;
+	int sendByWebSocket(QByteArray data);
+
 
 signals:
 	void closed();
@@ -28,21 +31,18 @@ signals:
 
 private:
 	QNetworkAccessManager *manager;
-	QNetworkRequest request;
-	QNetworkReply *reply;
 	QWebSocket webSocket;       //这个webSocket用于接受消息推送
 	QTimer timer;
 	QUrl socketUrl;
 	int totalFailTimes;         //总尝试连接次数
-
+	QMutex getMutex;
+	QMutex postMutex;
 
 private slots:
 	void onConnected();     //成功以WebSockets连接服务器后
 	void onDisconnected();  //WebSockets连接断开后
 	void reconnect();
 	void onTextMessageReceived(QString message);
-	QString managerFinished(QNetworkReply *reply);
-
 };
 
 #endif // CLIENTCORE_H
