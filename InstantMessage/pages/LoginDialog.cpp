@@ -52,20 +52,22 @@ void LoginDialog::on_btRegister_clicked()
 
 void LoginDialog::on_btLogin_clicked()
 {
-	QString account = ui->editAccount->text().remove(QRegExp("\\s"));  //去除空格
-	QString password = ui->editPassword->text().remove(QRegExp("\\s"));
-	//进行验证
-	MainSystem *system = MainSystem::getMainSystem();
-	int state = system->login(account, password);
-	if (state == 0) {
-		//若返回0，表示用户信息，会话列表，好友列表均正确初始化
-
-	}
-	//进行验证
-
-	if (!state)
-		QMessageBox::information(this, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("用户名或密码错误"));
-	else {
+	bool debug = true;
+	if (!debug) {
+		QString account = ui->editAccount->text().remove(QRegExp("\\s"));  //去除空格
+		QString password = ui->editPassword->text().remove(QRegExp("\\s"));
+		//进行验证
+		MainSystem *system = MainSystem::getSystem();
+		int state = system->login(account, password);
+		if (state == 0) {
+			//若返回0，表示用户信息，会话列表，好友列表均正确初始化
+			emit showMain();
+			this->hide();
+		} else if (state == -4)
+			QMessageBox::information(this, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("用户名或密码错误"));
+		else
+			QMessageBox::information(this, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("在载入过程中出现网络连接错误"));
+	} else {
 		emit showMain();
 		this->hide();
 	}

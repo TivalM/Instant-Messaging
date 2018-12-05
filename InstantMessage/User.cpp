@@ -52,6 +52,16 @@ QString User::getAccountUser() const
 	return accountUser;
 }
 
+QPixmap *User::getHeadImg() const
+{
+	return headImg;
+}
+
+QString User::getArea() const
+{
+	return area;
+}
+
 
 
 int User::getState() const

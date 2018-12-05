@@ -32,10 +32,13 @@ private:
 	ContactForm *contactForm;   //联系人界面
 	ToolsForm *toolsForm;       //工具箱界面
 
+signals:
+	void session(QString);
 
 private slots:
 	void receiveShow();     //收到由其它界面发送的信号时，该页面自主显示
 	void switchToSession();
+	void switchToSession(QString);
 	void switchToContact();
 	void switchToTool();
 };

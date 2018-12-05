@@ -12,7 +12,6 @@
 class MainSystem
 {
 public:
-	MainSystem *getSystem();
 	//系统登录时从服务器读入信息，此处get的是系统中已保存的信息
 	//Id是服务器为用户分配的唯一标识符，账号是用户手动输入用于登陆的唯一的身份信息
 	int signUp(QString account, QString password, QString nickname);
@@ -27,13 +26,18 @@ public:
 	int createASession(int peerId);
 	int sendfriendInvite(int peerId);
 	int sendMessage(int sessoinId);
-	User getFriendById(int id);
+	int sortSessions();
+	int sortFriends();
+	User *getFriendById(int id);
+	User *getFriendByAccount(QString account);
 	Session &getSessoinById(unsigned int id);
+	std::vector<Session> getSessions() const;
+	std::vector<User> getFriends()const;
 	int queryUser(QString account);
 	int sendFriendRequest(QString account);
 	int deleteFriend(QString account);
 	int modifyUserInfo(QString nickname, QString area);
-	static MainSystem *getMainSystem();
+	static MainSystem *getSystem();
 
 private:
 	MainSystem();

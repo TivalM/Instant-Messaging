@@ -2,6 +2,8 @@
 #define REGISTERDIALOG_H
 #pragma once
 #include "components/BaseWindow.h"
+#include "MainSystem.h"
+#include <QMessageBox>
 namespace Ui
 {
 class RegisterDialog;

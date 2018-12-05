@@ -12,11 +12,13 @@ public:
 	std::vector<Message> getMessages() const;
 	int insertMessage(int idSender, QString date, QString type, QString content);
 	int getSessionId() const;
-
+	QTime getLastTime()const;
 	void setSessionId(int value);
-
+	std::vector<int> getParticipators() const;
+	void addParticipators(int userId);
 private:
 	int sessionId;
+	std::vector<int> participators;
 	std::vector<Message> messages;
 };
 

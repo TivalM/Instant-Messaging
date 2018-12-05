@@ -15,7 +15,8 @@ public:
 	int getIdUser() const;
 	QString getNameUser() const;
 	QString getAccountUser() const;
-
+	QPixmap *getHeadImg() const;
+	QString getArea() const;
 
 private:
 	int idUser;

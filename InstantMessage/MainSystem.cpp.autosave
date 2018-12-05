@@ -369,6 +369,7 @@ int MainSystem::createASession(int peerId)
 //		delete reply;
 //		return -1;  //无法解析Json
 //	}
+    sessions.push_back()
 	return 0;
 }
 

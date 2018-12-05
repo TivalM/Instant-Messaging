@@ -26,7 +26,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="spacing">
-      <number>32</number>
+      <number>44</number>
      </property>
      <property name="leftMargin">
       <number>100</number>
@@ -54,12 +54,12 @@
         </font>
        </property>
        <property name="text">
-        <string>用户名</string>
+        <string>账号</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="editName">
+      <widget class="QLineEdit" name="editAccount">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>

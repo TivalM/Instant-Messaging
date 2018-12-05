@@ -19,7 +19,7 @@ private:
 	int idSender;
 	QTime date;
 	QString type;
-	QByteArray content;
+	QString content;
 };
 
 #endif // MESSAGE_H

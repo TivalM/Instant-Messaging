@@ -11,12 +11,24 @@ ContactForm::ContactForm(QWidget *parent) :
 	ui->horizontalLayout->addWidget(personInfoForm);
 	ui->list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	initial();
+	connect(ui->list, SIGNAL(currentRowChanged(int)), this, SLOT(getIdByIndex(int)));
+	connect(this, SIGNAL(freshInfoPage(int)), personInfoForm, SLOT(freshInfo(int)));
 }
 
 
 ContactForm::~ContactForm()
 {
 	delete ui;
+}
+
+Ui::SessionForm *ContactForm::getUi() const
+{
+	return ui;
+}
+
+PersonInfoForm *ContactForm::getPersonInfoForm() const
+{
+	return personInfoForm;
 }
 
 void ContactForm::initial()
@@ -28,28 +40,34 @@ void ContactForm::initial()
 		styleSheet += QLatin1String(file.readAll());
 		this->setStyleSheet(styleSheet);
 	}
-
-	createOneFriend(0, QPixmap(":/src/image/head2.png"), "Core");
-	createOneFriend(1, QPixmap(":/src/image/head3.png"), "Karl");
-	createOneFriend(2, QPixmap(":/src/image/head4.png"), "Macy");
-	createOneFriend(3, QPixmap(":/src/image/head5.png"), "Tanya");
-	createOneFriend(4, QPixmap(":/src/image/head6.png"), "Terry");
-	createOneFriend(5, QPixmap(":/src/image/head7.png"), "Able");
-	createOneFriend(6, QPixmap(":/src/image/head8.png"), "Jocelyn");
-	sortFriends();
-	addAllFriendsIntoList();
-	connect(ui->list, SIGNAL(currentRowChanged(int)), personInfoForm, SLOT(freshInfo()));
+	refreshFriends();
 }
 
-void ContactForm::freshInfo()
+void ContactForm::getIdByIndex(int currIndex)
 {
-
+	//判断选中的item是哪一个user
+	int count = -1;
+	for (int i = 0; i <= currIndex; i++)
+		if (ui->list->item(i)->whatsThis() == "A Friend Of You")
+			count++;
+	emit freshInfoPage(count);
 }
 
-void ContactForm::createOneFriend(int userid, QPixmap img, QString name)
+void ContactForm::createOneFriendItem(int userid, QPixmap img, QString name)
 {
 	ListItemForm *p = new ListItemForm(this, userid, img, name);
 	friendFormList.push_back(p);
+}
+
+void ContactForm::refreshFriends()
+{
+	MainSystem *system = MainSystem::getSystem();
+	//根据系统信息更新会话列表
+	ui->list->clear();
+	for (auto iter : system->getFriends()) {
+		createOneFriendItem(iter.getIdUser(), *(iter.getHeadImg()), iter.getNameUser());
+	}
+	addAllFriendsIntoList();
 }
 
 void ContactForm::loadSelectedPerson()
@@ -74,33 +92,16 @@ void ContactForm::addAllFriendsIntoList()
 			charForm->labelImg->setText(divide);
 			header = new QListWidgetItem(ui->list);
 			header->setSizeHint(QSize(ui->list->width(), 35));
-
+			header->setFlags(Qt::ItemFlag::ItemIsSelectable);
 			ui->list->addItem(header);
 			ui->list->setItemWidget(header, w);
 		}
 		//    layout->add
 		QListWidgetItem *aitem = new QListWidgetItem(ui->list);
+		aitem->setWhatsThis("A Friend Of You");
 		aitem->setSizeHint(QSize(ui->list->width(), 50));
 		ui->list->addItem(aitem);
 		ui->list->setItemWidget(aitem, friendFormList.at(i));
 
 	}
 }
-
-void ContactForm::sortFriends()
-{
-	//按字典序比较并排序
-	//转为unsigned int可以解除警告
-	int i, j;
-	ListItemForm *temp = nullptr;
-	for (i = 1; i < 7; i++) {
-		temp = friendFormList.at(i);
-		j = i - 1;
-		while (j >= 0 && friendFormList.at(j)->getName() > temp->getName()) {
-			friendFormList.at(j + 1) = friendFormList.at(j);
-			j--;
-		}
-		friendFormList.at(j + 1) = temp;
-	}
-}
-

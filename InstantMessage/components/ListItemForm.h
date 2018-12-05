@@ -14,14 +14,14 @@ class ListItemForm : public QWidget
 	Q_OBJECT
 
 public:
-	explicit ListItemForm(QWidget *parent, int userId, QPixmap img, QString name, QString motto = "");
+	explicit ListItemForm(QWidget *parent, int Id, QPixmap img, QString name, QString motto = "");
 //	void initial(QPixmap img, QString name, QString motto = "");
 	~ListItemForm();
 	QString getName() const;
-	int getUserId() const;
+	int getId() const;
 
 private:
-	int userId;
+	int Id;
 	QPixmap headImg;
 	QString name;
 	QString personalMotto;

@@ -4,8 +4,6 @@ ClientCore::ClientCore(QObject *parent) :
 	QObject(parent),  timer(), totalFailTimes(0)
 {
 	manager = new QNetworkAccessManager(this);
-	getMutex.unlock();
-	postMutex.unlock();
 }
 
 

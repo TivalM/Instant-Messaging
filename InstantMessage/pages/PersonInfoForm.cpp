@@ -25,10 +25,18 @@ PersonInfoForm::~PersonInfoForm()
 	delete ui;
 }
 
-void PersonInfoForm::freshInfo()
+void PersonInfoForm::freshInfo(int friendId)
 {
-	ui->labelNickName->setText("Karl");
-	ui->labelAccount->setText("76895");
-	ui->labelHead->setPixmap(QPixmap(":/src/image/head3.png"));
-	ui->labelArea->setText(QString::fromLocal8Bit("广东-深圳"));
+	MainSystem *system = MainSystem::getSystem();
+	User *temp  = system->getFriendById(friendId);
+
+	ui->labelNickName->setText(temp->getNameUser());
+	ui->labelAccount->setText(temp->getAccountUser());
+	ui->labelHead->setPixmap(*(temp->getHeadImg()));
+	ui->labelArea->setText(temp->getArea());
+}
+
+void PersonInfoForm::on_btToSession_clicked()
+{
+	emit(toSession(ui->labelAccount->text()));
 }

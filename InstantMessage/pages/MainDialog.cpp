@@ -8,10 +8,11 @@ MainDialog::MainDialog(QWidget *parent, int windowType) :
 {
 	ui->setupUi(this);
 
-	initTitleBar();
 	sessionForm = new SessionForm(this);
 	contactForm = new ContactForm(this);
 	toolsForm = new ToolsForm(this);
+
+	initTitleBar();
 }
 
 MainDialog::~MainDialog()
@@ -27,6 +28,8 @@ void MainDialog::initTitleBar()
 	connect(titleBarPtr->getUI()->btSessions, SIGNAL(clicked()), this, SLOT(switchToSession()));
 	connect(titleBarPtr->getUI()->btFriends, SIGNAL(clicked()), this, SLOT(switchToContact()));
 	connect(titleBarPtr->getUI()->btTool, SIGNAL(clicked()), this, SLOT(switchToTool()));
+	connect(contactForm->getPersonInfoForm(), SIGNAL(toSession(QString)), this, SLOT(switchToSession(QString)));
+	connect(this, SIGNAL(session(QString)), sessionForm, SLOT(CreateOrTurnTo(QString)));
 }
 
 void MainDialog::loadUser()
@@ -37,6 +40,12 @@ void MainDialog::loadUser()
 void MainDialog::switchToSession()
 {
 	ui->pages->setCurrentIndex(0);
+}
+
+void MainDialog::switchToSession(QString account)
+{
+	ui->pages->setCurrentIndex(0);
+	emit(session(account));
 }
 
 void MainDialog::switchToContact()

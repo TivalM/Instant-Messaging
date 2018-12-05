@@ -2,10 +2,12 @@
 #include "pages/RegisterDialog.h"
 #include "pages/MainDialog.h"
 #include "ui_FunctionTitleBar.h"
+#include "MainSystem.h"
+
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-
+	MainSystem *system = MainSystem::getSystem();
 	LoginDialog l;
 	RegisterDialog r;
 	MainDialog m;

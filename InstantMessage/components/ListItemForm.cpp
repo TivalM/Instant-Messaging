@@ -1,7 +1,7 @@
 ﻿#include "components/ListItemForm.h"
 #include "ui_ListItemForm.h"
 
-ListItemForm::ListItemForm(QWidget *parent, int userId, QPixmap img, QString name, QString motto):
+ListItemForm::ListItemForm(QWidget *parent, int Id, QPixmap img, QString name, QString motto):
 	QWidget(parent),
 	ui(new Ui::ListItemForm)
 {
@@ -9,7 +9,7 @@ ListItemForm::ListItemForm(QWidget *parent, int userId, QPixmap img, QString nam
 	ui->setupUi(this);
 	this->headImg = img;
 	this->name = name;
-	this->userId = userId;
+	this->Id = Id;
 	this->personalMotto = motto;
 
 	ui->labelImg->setPixmap(img);
@@ -31,7 +31,7 @@ QString ListItemForm::getName() const
 	return name;
 }
 
-int ListItemForm::getUserId() const
+int ListItemForm::getId() const
 {
-	return userId;
+	return Id;
 }
