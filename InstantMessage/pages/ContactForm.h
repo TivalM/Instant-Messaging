@@ -6,7 +6,7 @@
 #include <vector>
 #include <QFile>
 #include "MainSystem.h"
-#include "pages/PersonInfoForm.h"
+#include "components/FriendsInfoForm.h"
 #include "ui_SessionForm.h"
 #include "components/ListItemForm.h"
 
@@ -30,12 +30,12 @@ public:
 	void loadSelectedPerson();
 	void addAllFriendsIntoList();
 	Ui::SessionForm *getUi() const;
-	PersonInfoForm *getPersonInfoForm() const;
+	FriendsInfoForm *getFriendsInfoForm() const;
 
 private:
 	//两页面使用同一个包含QListWidget的ui，重构时应重写为对基类的继承
 	Ui::SessionForm *ui;
-	PersonInfoForm *personInfoForm;
+	FriendsInfoForm *friendsInfoForm;
 	std::vector<ListItemForm *> friendFormList;
 signals:
 	void freshInfoPage(int);

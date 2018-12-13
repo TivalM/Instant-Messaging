@@ -7,12 +7,19 @@ ContactForm::ContactForm(QWidget *parent) :
 {
 	ui->setupUi(this);
 	//在右边插入信息页，该信息页随着选择的联系人的不同而刷新
-	personInfoForm = new PersonInfoForm();
-	ui->horizontalLayout->addWidget(personInfoForm);
+	friendsInfoForm = new FriendsInfoForm();
+	ui->horizontalLayout->addWidget(friendsInfoForm);
 	ui->list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	initial();
 	connect(ui->list, SIGNAL(currentRowChanged(int)), this, SLOT(getIdByIndex(int)));
-	connect(this, SIGNAL(freshInfoPage(int)), personInfoForm, SLOT(freshInfo(int)));
+	connect(this, SIGNAL(freshInfoPage(int)), friendsInfoForm, SLOT(freshInfo(int)));
+	if (friendFormList.size() > 0) {
+		//至少有两个item
+		//参数表示第几个item
+		ui->list->setCurrentRow(1);
+		//参数表示第几个好友
+		emit freshInfoPage(0);
+	}
 }
 
 
@@ -26,9 +33,9 @@ Ui::SessionForm *ContactForm::getUi() const
 	return ui;
 }
 
-PersonInfoForm *ContactForm::getPersonInfoForm() const
+FriendsInfoForm *ContactForm::getFriendsInfoForm() const
 {
-	return personInfoForm;
+	return friendsInfoForm;
 }
 
 void ContactForm::initial()

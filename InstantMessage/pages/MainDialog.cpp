@@ -28,7 +28,7 @@ void MainDialog::initTitleBar()
 	connect(titleBarPtr->getUI()->btSessions, SIGNAL(clicked()), this, SLOT(switchToSession()));
 	connect(titleBarPtr->getUI()->btFriends, SIGNAL(clicked()), this, SLOT(switchToContact()));
 	connect(titleBarPtr->getUI()->btTool, SIGNAL(clicked()), this, SLOT(switchToTool()));
-	connect(contactForm->getPersonInfoForm(), SIGNAL(toSession(QString)), this, SLOT(switchToSession(QString)));
+	connect(contactForm->getFriendsInfoForm(), SIGNAL(toSession(QString)), this, SLOT(switchToSession(QString)));
 	connect(this, SIGNAL(session(QString)), sessionForm, SLOT(CreateOrTurnTo(QString)));
 }
 

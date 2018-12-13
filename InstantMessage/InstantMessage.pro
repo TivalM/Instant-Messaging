@@ -41,23 +41,8 @@ SOURCES += \
     Message.cpp \
     Session.cpp \
     User.cpp \
-    components/BaseWindow.cpp \
-    components/ChatForm.cpp \
-    components/ListItemForm.cpp \
-    components/TitleBar.cpp \
-    pages/ContactForm.cpp \
-    pages/LoginDialog.cpp \
-    pages/MainDialog.cpp \
-    pages/RegisterDialog.cpp \
-    pages/SessionForm.cpp \
-    pages/ToolsForm.cpp \
-    ClientCore.cpp \
-    main.cpp \
-    MainSystem.cpp \
-    Message.cpp \
-    Session.cpp \
-    User.cpp \
-    pages/PersonInfoForm.cpp
+    components/FriendsInfoForm.cpp \
+    components/SelfInfoForm.cpp
 
 
 HEADERS += \
@@ -68,7 +53,6 @@ HEADERS += \
     pages/ContactForm.h \
     pages/LoginDialog.h \
     pages/MainDialog.h \
-    pages/PersonInfoForm.h \
     pages/RegisterDialog.h \
     pages/SessionForm.h \
     pages/ToolsForm.h \
@@ -77,22 +61,8 @@ HEADERS += \
     Message.h \
     Session.h \
     User.h \
-    components/BaseWindow.h \
-    components/ChatForm.h \
-    components/ListItemForm.h \
-    components/TitleBar.h \
-    pages/ContactForm.h \
-    pages/LoginDialog.h \
-    pages/MainDialog.h \
-    pages/PersonInfoForm.h \
-    pages/RegisterDialog.h \
-    pages/SessionForm.h \
-    pages/ToolsForm.h \
-    ClientCore.h \
-    MainSystem.h \
-    Message.h \
-    Session.h \
-    User.h
+    components/FriendsInfoForm.h \
+    components/SelfInfoForm.h
 
 
 FORMS += \
@@ -102,10 +72,10 @@ FORMS += \
     components/ListItemForm.ui \
     pages/LoginDialog.ui \
     pages/MainDialog.ui \
-    pages/PersonInfoForm.ui \
     pages/RegisterDialog.ui \
     pages/SessionForm.ui \
-    pages/ToolsForm.ui
+    pages/ToolsForm.ui \
+    components/PersonInfoForm.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

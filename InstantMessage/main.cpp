@@ -7,7 +7,6 @@
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	MainSystem *system = MainSystem::getSystem();
 	LoginDialog l;
 	RegisterDialog r;
 	MainDialog m;

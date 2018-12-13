@@ -68,7 +68,10 @@ User *MainSystem::getFriendByAccount(QString account)
 
 Session &MainSystem::getSessoinById(unsigned int id)
 {
-	return sessions.at(id);
+
+	for (unsigned  int i = 0; i < sessions.size(); i++)
+		if (sessions.at(i).getSessionId() == id)
+			return sessions.at(i);
 }
 
 int MainSystem::signUp(QString account, QString password, QString nickname)
@@ -330,45 +333,11 @@ QPixmap *MainSystem::loadImg(int id)
 
 int MainSystem::createASession(int peerId)
 {
-//	//Websocket
-//	QString u = QString("%1/user/register").arg(PREURL);
-//	QUrl url(u);
-//	QNetworkRequest request(url);
-//	//打包json
-//	QJsonObject json;
-//	json.insert("account", account);
-//	json.insert("password", password);
-//	json.insert("nickname", nickname);
-//	//转为字节流
-//	QJsonDocument jsonDoc(json);
-//	QByteArray jsonData = jsonDoc.toJson();
-//	//设置请求头
-//	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-//	request.setHeader(QNetworkRequest::ContentLengthHeader, QByteArray::number(jsonData.size()));
-//	//提交请求并得到结果
-//	QNetworkReply *reply = clientCore->sendPostRequset(request, jsonData);
-
-//	if (reply == nullptr)
-//		return -2;  //获取回复失败(网络状况不明)
-//	//解析
-//	QString strReply = QString::fromStdString(reply->readAll().toStdString());
-//	QJsonDocument jsonReply = QJsonDocument::fromJson(strReply.toUtf8());
-
-//	if (!jsonReply.isNull()) {
-//		//成功解析
-//		QJsonObject json = jsonReply.object();
-//		if (json["code"].toInt() == 1) {
-//			delete reply;
-//			return 0;       //注册成功
-//		} else {
-//			delete reply;
-//			return -3;      //账号已存在
-//		}
-//	} else {
-//		qDebug() << "Login:  " << strReply;
-//		delete reply;
-//		return -1;  //无法解析Json
-//	}
+	//发出一个请求，成功后得到系统返回的Session id
+	//创建这个会话
+	Session newSession = Session(sessions.size());
+	newSession.addParticipators(peerId);
+	sessions.push_back(newSession);
 	return 0;
 }
 

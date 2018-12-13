@@ -48,8 +48,11 @@ void SessionForm::CreateOrTurnTo(QString account)
 			return;
 		}
 	}
+	//没有此对话，则创建
+	//是使用乐观刷新还是悲观刷新
 	system->createASession(system->getFriendByAccount(account)->getIdUser());
 	refreshSessions();
+	ui->list->setCurrentRow(sessionFormList.size() - 1);
 }
 
 
