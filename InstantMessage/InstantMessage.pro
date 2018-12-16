@@ -42,7 +42,11 @@ SOURCES += \
     Session.cpp \
     User.cpp \
     components/FriendsInfoForm.cpp \
-    components/SelfInfoForm.cpp
+    components/SelfInfoForm.cpp \
+    components/InformListItemForm.cpp \
+    pages/AddFriendsDialog.cpp \
+    pages/InformDialog.cpp \
+    MainSystem.cpp
 
 
 HEADERS += \
@@ -62,7 +66,11 @@ HEADERS += \
     Session.h \
     User.h \
     components/FriendsInfoForm.h \
-    components/SelfInfoForm.h
+    components/SelfInfoForm.h \
+    components/InformListItemForm.h \
+    pages/AddFriendsDialog.h \
+    pages/InformDialog.h \
+    MainSystem.h
 
 
 FORMS += \
@@ -75,7 +83,10 @@ FORMS += \
     pages/RegisterDialog.ui \
     pages/SessionForm.ui \
     pages/ToolsForm.ui \
-    components/PersonInfoForm.ui
+    components/PersonInfoForm.ui \
+    components/InformListItemForm.ui \
+    pages/AddFriendsDialog.ui \
+    pages/InformDialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

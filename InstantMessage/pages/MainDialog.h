@@ -7,6 +7,8 @@
 #include "SessionForm.h"
 #include "ContactForm.h"
 #include "ToolsForm.h"
+#include "pages/AddFriendsDialog.h"
+#include "pages/InformDialog.h"
 
 namespace Ui
 {
@@ -37,10 +39,12 @@ signals:
 
 private slots:
 	void receiveShow();     //收到由其它界面发送的信号时，该页面自主显示
+	void showFriendRequest();
 	void switchToSession();
 	void switchToSession(QString);
 	void switchToContact();
 	void switchToTool();
+	void openAddFriend();
 };
 
 #endif // MAINDIALOG_H

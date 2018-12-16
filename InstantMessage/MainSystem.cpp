@@ -2,30 +2,32 @@
 
 MainSystem *MainSystem::mainSystem = nullptr;
 
-MainSystem::MainSystem()
+
+MainSystem::MainSystem(QObject *parent) : QObject(parent)
 {
 	clientCore = new ClientCore();
 	//预留空间
-//	friends.reserve(16);
-//	sessions.reserve(8);
+	//  friends.reserve(16);
+	//  sessions.reserve(8);
 	//测试
-	friends.push_back(User(0, "Core", "55789", QString::fromLocal8Bit("广州"), new QPixmap(":/src/image/head2.png")));
-	friends.push_back(User(1, "Karl", "46498", QString::fromLocal8Bit("深圳"), new QPixmap(":/src/image/head3.png")));
-	friends.push_back(User(2, "Macy", "78416", QString::fromLocal8Bit("贵阳"), new QPixmap(":/src/image/head4.png")));
-	friends.push_back(User(3, "Tanya", "12389", QString::fromLocal8Bit("成都"), new QPixmap(":/src/image/head5.png")));
-	friends.push_back(User(4, "Terry", "77866", QString::fromLocal8Bit("广西"), new QPixmap(":/src/image/head6.png")));
-	friends.push_back(User(5, "Able", "45589", QString::fromLocal8Bit("北京"), new QPixmap(":/src/image/head7.png")));
-	friends.push_back(User(6, "Jocelyn", "95678", QString::fromLocal8Bit("重庆"), new QPixmap(":/src/image/head8.png")));
+//	friends.push_back(User(0, "Core", "55789", QString::fromLocal8Bit("广州"), new QPixmap(":/src/image/head2.png")));
+//	friends.push_back(User(1, "Karl", "46498", QString::fromLocal8Bit("深圳"), new QPixmap(":/src/image/head3.png")));
+//	friends.push_back(User(2, "Macy", "78416", QString::fromLocal8Bit("贵阳"), new QPixmap(":/src/image/head4.png")));
+//	friends.push_back(User(3, "Tanya", "12389", QString::fromLocal8Bit("成都"), new QPixmap(":/src/image/head5.png")));
+//	friends.push_back(User(4, "Terry", "77866", QString::fromLocal8Bit("广西"), new QPixmap(":/src/image/head6.png")));
+//	friends.push_back(User(5, "Able", "45589", QString::fromLocal8Bit("北京"), new QPixmap(":/src/image/head7.png")));
+//	friends.push_back(User(6, "Jocelyn", "95678", QString::fromLocal8Bit("重庆"), new QPixmap(":/src/image/head8.png")));
 
-	sessions.push_back(Session(0));
-	sessions.at(0).addParticipators(2);
-	sessions.push_back(Session(1));
-	sessions.at(1).addParticipators(1);
-	sessions.push_back(Session(2));
-	sessions.at(2).addParticipators(6);
-	sessions.push_back(Session(3));
-	sessions.at(3).addParticipators(5);
+//	sessions.push_back(Session(0));
+//	sessions.at(0).addParticipators(2);
+//	sessions.push_back(Session(1));
+//	sessions.at(1).addParticipators(1);
+//	sessions.push_back(Session(2));
+//	sessions.at(2).addParticipators(6);
+//	sessions.push_back(Session(3));
+//	sessions.at(3).addParticipators(5);
 }
+
 
 std::vector<Session> MainSystem::getSessions()const
 {
@@ -66,6 +68,11 @@ User *MainSystem::getFriendByAccount(QString account)
 	return nullptr;
 }
 
+User *MainSystem::getSystemUser()
+{
+	return systemUser;
+}
+
 Session &MainSystem::getSessoinById(unsigned int id)
 {
 
@@ -77,21 +84,13 @@ Session &MainSystem::getSessoinById(unsigned int id)
 int MainSystem::signUp(QString account, QString password, QString nickname)
 {
 	QString u = QString("%1/user/register").arg(PREURL);
+	QByteArray postData;
+	postData.append(QString("account=%1&password=%2&name=%3").arg(account).arg(password).arg(nickname));
 	QUrl url(u);
 	QNetworkRequest request(url);
-	//打包json
-	QJsonObject json;
-	json.insert("account", account);
-	json.insert("password", password);
-	json.insert("nickname", nickname);
-	//转为字节流
-	QJsonDocument jsonDoc(json);
-	QByteArray jsonData = jsonDoc.toJson();
-	//设置请求头
-	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-	request.setHeader(QNetworkRequest::ContentLengthHeader, QByteArray::number(jsonData.size()));
+	request.setRawHeader("Content-Type", "application/x-www-form-urlencoded");
 	//提交请求并得到结果
-	QNetworkReply *reply = clientCore->sendPostRequset(request, jsonData);
+	QNetworkReply *reply = clientCore->sendPostRequset(request, postData);
 
 	if (reply == nullptr)
 		return -2;  //获取回复失败(网络状况不明)
@@ -103,14 +102,14 @@ int MainSystem::signUp(QString account, QString password, QString nickname)
 		//成功解析
 		QJsonObject json = jsonReply.object();
 		if (json["code"].toInt() == 1) {
-			delete reply;
+			reply->deleteLater();
 			return 0;       //注册成功
 		} else {
 			delete reply;
 			return -3;      //账号已存在
 		}
 	} else {
-		qDebug() << "Login:  " << strReply;
+		qDebug() << "Sign Up:  " << strReply;
 		delete reply;
 		return -1;  //无法解析Json
 	}
@@ -118,9 +117,15 @@ int MainSystem::signUp(QString account, QString password, QString nickname)
 
 int MainSystem::login(QString account, QString password)
 {
-	QString u = QString("%1/user/login?account=%2&password=%3").arg(PREURL).arg(account).arg(password);
+	QString u = QString("%1/user/login").arg(PREURL);
+	QByteArray postData;
+	postData.append(QString("account=%1&password=%2").arg(account).arg(password));
 	QUrl url(u);
-	QNetworkReply *reply = clientCore->sendGetRequset(url);
+
+	QNetworkRequest request(url);
+
+	request.setRawHeader("Content-Type", "application/x-www-form-urlencoded");
+	QNetworkReply *reply = clientCore->sendPostRequset(request, postData);
 	if (reply == nullptr)
 		return -2;
 	//解析
@@ -131,16 +136,16 @@ int MainSystem::login(QString account, QString password)
 		//成功解析
 		QJsonObject json = jsonReply.object();
 		systemUser = new User(account);
+
 		if (json["code"].toInt() == 1) {    //在服务器登陆成功
-			//请求该系统用户的其它信息
-			if (loadUserInfo() == 0 && loadSessions() == 0 && loadFriendList() == 0) {
-				clientCore->initWebSocket(QUrl(QString("ws://%1/webSocket/%2").arg(PREURL).arg("1")));
+			//请求该系统用户的其它信息并初始化
+			if (loadUserInfo() == 0 && loadFriendList() == 0) {
+				clientCore->initWebSocket(QUrl(QString("ws://120.78.120.65:8080/webSocket/%2").arg(systemUser->getIdUser())));
 				sortFriends();
 				delete reply;
 				return 0;
 			} else {
 				delete reply;
-				qDebug() << "fail when loadUserInfo";
 				return -5;//载入用户信息失败
 			}
 		} else {
@@ -157,7 +162,14 @@ int MainSystem::login(QString account, QString password)
 int MainSystem::loadUserInfo()
 {
 	QUrl url(QString("%1/user/info").arg(PREURL));
-	QNetworkReply *reply = clientCore->sendGetRequset(url);
+
+	QNetworkRequest request;
+	QVariant val;
+	val.setValue(clientCore->getCookie());
+	qDebug() << clientCore->getCookie();
+	request.setUrl(url);
+	request.setHeader(QNetworkRequest::CookieHeader, val);
+	QNetworkReply *reply = clientCore->sendGetRequset(request);
 	if (reply == nullptr)
 		return -2;
 	//解析
@@ -171,13 +183,13 @@ int MainSystem::loadUserInfo()
 			QJsonObject data = json["data"].toObject();
 			QPixmap *img = loadImg(data["userId"].toInt());
 			if (img == nullptr) {
-				qDebug() << "can not load headimg " << data["userId"].toInt();
+				qDebug() << "can not load headImg " << data["userId"].toInt();
 			}
 			//更新用户其它信息
-			systemUser->loadInfo(data["userId"].toInt(), data["name"].toString(), data["area"].toString(), img);
+			systemUser->setInfo(data["userId"].toInt(), data["name"].toString(), data["area"].toString(), img);
+			emit initSelfInfoWidgets();
 			//得知登录的用户后初始化websocket连接
-			clientCore->initWebSocket(QUrl(QString("ws://%1/webSocket/%2").arg(PREURL).arg(data["userId"].toInt())));
-			delete reply;
+			reply->deleteLater();
 			delete img;
 			return 0;
 		} else {
@@ -193,11 +205,14 @@ int MainSystem::loadUserInfo()
 int MainSystem::loadFriendList()
 {
 	QUrl url(QString("%1/user/friendList").arg(PREURL));
-	QNetworkReply *reply = clientCore->sendGetRequset(url);
+	QNetworkRequest request;
+	request.setUrl(url);
+	QNetworkReply *reply = clientCore->sendGetRequset(request);
 	if (reply == nullptr)
 		return -2;
 	//解析
 	QString strReply = QString::fromStdString(reply->readAll().toStdString());
+	qDebug() << strReply;
 	QJsonDocument jsonReply = QJsonDocument::fromJson(strReply.toUtf8());
 	if (!jsonReply.isNull()) {
 		//成功解析
@@ -217,6 +232,7 @@ int MainSystem::loadFriendList()
 				friends.push_back(User(element["userId"].toInt(), element["name"].toString(),
 				                       element["account"].toString(), element["area"].toString(), img));
 			}
+			emit(initFriendsWidgets());
 			delete reply;
 			return 0;
 		} else {
@@ -225,7 +241,7 @@ int MainSystem::loadFriendList()
 			return -6; //失败
 		}
 	} else {
-		qDebug() << "LoadUserInfo:  " << strReply;
+		qDebug() << "LoadFriendList:  " << strReply;
 		return -1;
 	}
 }
@@ -234,7 +250,9 @@ int MainSystem::loadSessions()
 {
 	//待完成
 	QUrl url(QString(""));
-	QNetworkReply *reply = clientCore->sendGetRequset(url);
+	QNetworkRequest request;
+	request.setUrl(url);
+	QNetworkReply *reply = clientCore->sendGetRequset(request);
 	if (reply == nullptr)
 		return -2;
 	return 0;
@@ -254,7 +272,9 @@ int MainSystem::ifSessionExist(int sessionId)
 int MainSystem::loadMessages(int sessionId)
 {
 	QUrl url(QString("%1/message/historyMessage?chatSessionId=%2").arg(PREURL).arg(sessionId));
-	QNetworkReply *reply = clientCore->sendGetRequset(url);
+	QNetworkRequest request;
+	request.setUrl(url);
+	QNetworkReply *reply = clientCore->sendGetRequset(request);
 	if (reply == nullptr)
 		return -2;
 	//解析
@@ -306,7 +326,7 @@ int MainSystem::loadMessages(int sessionId)
 			return -6;   //失败
 		}
 	} else {
-		qDebug() << "LoadUserInfo:  " << strReply;
+		qDebug() << "LoadMessage:  " << strReply;
 		return -1;
 	}
 }
@@ -323,7 +343,9 @@ QPixmap *MainSystem::loadImg(int id)
 {
 	QPixmap *img = new QPixmap();
 	QUrl url(QString("%1/static/image/%2.jpg").arg(PREURL).arg(id));
-	QNetworkReply *reply = clientCore->sendGetRequset(url);
+	QNetworkRequest request;
+	request.setUrl(url);
+	QNetworkReply *reply = clientCore->sendGetRequset(request);
 	qDebug() << "Load Img" << id;
 	if (img->loadFromData(reply->readAll()))
 		return img;

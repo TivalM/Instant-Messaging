@@ -59,6 +59,7 @@ void ChatForm::on_btSend_clicked()
 		qDebug() << s1;
 		ui->textBrowser->insertHtml(s1);
 	}
+	ui->textEdit->clear();
 	ui->textBrowser->moveCursor(QTextCursor::End); //ui->textEdit->clear();}
 }
 void ChatForm::on_label_linkActivated(const QString &link)

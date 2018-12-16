@@ -26,10 +26,10 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
 	ui->editNickname->addAction(QIcon(":/src/image/mail.png"), QLineEdit::LeadingPosition);
 
 	//设置输入提示
-	ui->editAccount->setPlaceholderText(QString::fromLocal8Bit("用户名是唯一的、用于登陆的凭证。"));
+	ui->editAccount->setPlaceholderText(QString::fromLocal8Bit("账号是唯一的、用于登陆的凭证。"));
 	ui->editPassword->setPlaceholderText(QString::fromLocal8Bit("长度为6至18位，空格会被忽略"));
 	ui->editConfirm->setPlaceholderText(QString::fromLocal8Bit("请重复输入密码"));
-	ui->editNickname->setPlaceholderText(QString::fromLocal8Bit("邮箱是用于找回密码的凭证"));
+	ui->editNickname->setPlaceholderText(QString::fromLocal8Bit("在此设置您的用户昵称"));
 }
 
 void RegisterDialog::initTitleBar()
@@ -53,7 +53,7 @@ void RegisterDialog::receiveShow()
 
 void RegisterDialog::on_btRegister_clicked()
 {
-	bool debug = true;
+	bool debug = false;
 	if (!debug) {
 		MainSystem *system = MainSystem::getSystem();
 		//收集数据

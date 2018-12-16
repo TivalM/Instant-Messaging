@@ -18,7 +18,7 @@ int ClientCore::initWebSocket(const QUrl &url)
 	return 0;
 }
 
-QNetworkReply *ClientCore::sendGetRequset(QUrl &url)
+QNetworkReply *ClientCore::sendGetRequset(QNetworkRequest &request)
 //互斥处理未定
 {
 	QNetworkReply *reply;
@@ -27,26 +27,24 @@ QNetworkReply *ClientCore::sendGetRequset(QUrl &url)
 	timer.setInterval(RETRYTIME);   // 设置超时时间 8 秒
 	timer.setSingleShot(true);      // 单次触发
 	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
-	connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+
 	//异步发起请求
-	QNetworkRequest request;
-	request.setUrl(url);
 	int total = 1;
 	while (total <= 3) {
-//		getMutex.lock();
 		reply = manager->get(request);
+		connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
 		total++;
 		timer.start();
-		loop.exec();    //八秒后或接收到finished信号后退出
-		if (timer.isActive() && reply->error() == QNetworkReply::NoError) { //请求完成
-//			getMutex.unlock();
+		loop.exec();    //五秒后或接收到finished信号后退出
+		if (reply->error() == QNetworkReply::NoError) { //请求完成
 			return reply;
 		} else {        //超时或错误
 			if (timer.isActive()) {
 				timer.stop();
-				qDebug() << "POST: time out";
+				qDebug() << "GET: time out";
 			}
-			qDebug() << "POST: wrong";
+			qDebug() << "GET: wrong";
+			qDebug() << "GET: " << reply->error();
 			reply->abort();
 			delete reply;
 		}
@@ -56,7 +54,7 @@ QNetworkReply *ClientCore::sendGetRequset(QUrl &url)
 }
 
 
-QNetworkReply *ClientCore::sendPostRequset(QNetworkRequest postRequest, QByteArray jsonDate)
+QNetworkReply *ClientCore::sendPostRequset(QNetworkRequest &postRequest, QByteArray &postData)
 {
 	QNetworkReply *reply;
 	QEventLoop loop;
@@ -64,28 +62,37 @@ QNetworkReply *ClientCore::sendPostRequset(QNetworkRequest postRequest, QByteArr
 	timer.setInterval(RETRYTIME);   // 设置超时时间 8 秒
 	timer.setSingleShot(true);      // 单次触发
 	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
-	connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
 	//异步发起请求
 	int total = 1;
 	while (total <= 3) {
-		reply = manager->post(postRequest, jsonDate);
+		reply = manager->post(postRequest, postData);
+		connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
 		total++;
 		timer.start();
-		loop.exec();    //八秒后或接收到finished信号后退出
-		if (timer.isActive() && reply->error() == QNetworkReply::NoError) { //请求完成
+		loop.exec();    //三秒后或接收到finished信号后退出
+		if (reply->error() == QNetworkReply::NoError) { //请求完成
+			QString u = QString("%1/user/login").arg(PREURL);
+			if (manager->cookieJar()->cookiesForUrl(QUrl(u)).size() > 0)
+				cookie = manager->cookieJar()->cookiesForUrl(QUrl(u)).at(manager->cookieJar()->cookiesForUrl(QUrl(u)).size() - 1);
 			return reply;
 		} else {         //超时或错误
+			qDebug() << reply->error();
 			if (timer.isActive()) {
 				timer.stop();
 				qDebug() << "POST: time out";
-			}
-			qDebug() << "POST: wrong";
+			} else
+				qDebug() << "POST: wrong";
 			reply->abort();
 			delete reply;
 		}
 	}
 	qDebug() << "POST: fail";
 	return nullptr;
+}
+
+QNetworkCookie ClientCore::getCookie()
+{
+	return cookie;
 }
 
 QUrl ClientCore::getSocketUrl() const

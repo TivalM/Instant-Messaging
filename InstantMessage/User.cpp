@@ -4,11 +4,6 @@ User::User(QString account, int state)
 {
 	this->accountUser = account;
 	this->state  = state;
-
-	this->accountUser = "";
-	this->state = state;
-	this->area = "";
-	this->headImg = nullptr;
 }
 
 User::User(int id, QString name, QString account, QString area, QPixmap *headImg, int state)
@@ -26,7 +21,7 @@ int User::getIdUser() const
 	return idUser;
 }
 
-int User::loadInfo(int id, QString name, QString area, QPixmap *headImg)
+int User::setInfo(int id, QString name, QString area, QPixmap *headImg)
 {
 	this->idUser = id;
 	this->nameUser = name;

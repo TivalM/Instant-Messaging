@@ -9,7 +9,7 @@ class User
 public:
 	explicit User(QString account, int state = 0);//这个构造函数在初始化系统用户时使用
 	explicit User(int id, QString name, QString account, QString area, QPixmap *headImg = nullptr, int state = 0); //这个构造函数用于构造好友用户
-	int loadInfo(int id, QString name, QString area, QPixmap *headImg = nullptr);       //载入用户信息
+	int setInfo(int id, QString name, QString area, QPixmap *headImg = nullptr);       //载入用户信息
 	int modifyInfo(QString name, QString area);
 	int getState() const;
 	int getIdUser() const;

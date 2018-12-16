@@ -22,7 +22,6 @@ class ContactForm : public QWidget
 public:
 	explicit ContactForm(QWidget *parent = nullptr);
 	~ContactForm();
-	void initial();
 	void getIdByIndex();
 	void createOneFriendItem(int userid, QPixmap img, QString name);   //应当接受参数
 	void refreshFriends();  //根据系统储存的列表申请信息
@@ -42,6 +41,7 @@ signals:
 
 private slots:
 	void getIdByIndex(int currIndex);
+	void initial();
 };
 
 #endif // CONTACTFORM_H

@@ -28,6 +28,7 @@ void MainDialog::initTitleBar()
 	connect(titleBarPtr->getUI()->btSessions, SIGNAL(clicked()), this, SLOT(switchToSession()));
 	connect(titleBarPtr->getUI()->btFriends, SIGNAL(clicked()), this, SLOT(switchToContact()));
 	connect(titleBarPtr->getUI()->btTool, SIGNAL(clicked()), this, SLOT(switchToTool()));
+	connect(titleBarPtr->getUI()->btAdd, SIGNAL(clicked()), this, SLOT(openAddFriend()));
 	connect(contactForm->getFriendsInfoForm(), SIGNAL(toSession(QString)), this, SLOT(switchToSession(QString)));
 	connect(this, SIGNAL(session(QString)), sessionForm, SLOT(CreateOrTurnTo(QString)));
 }
@@ -58,6 +59,12 @@ void MainDialog::switchToTool()
 	ui->pages->setCurrentIndex(2);
 }
 
+void MainDialog::openAddFriend()
+{
+	AddFriendsDialog *d = new AddFriendsDialog(nullptr);
+	d->show();
+}
+
 
 void MainDialog::receiveShow()
 {
@@ -65,4 +72,10 @@ void MainDialog::receiveShow()
 	ui->pages->addWidget(contactForm);
 	ui->pages->addWidget(toolsForm);
 	this->show();
+}
+
+void MainDialog::showFriendRequest()
+{
+	InformDialog informDialog();
+
 }

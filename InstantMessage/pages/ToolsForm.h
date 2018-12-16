@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <vector>
 #include <QFile>
+#include "MainSystem.h"
 #include "components/SelfInfoForm.h"
 #include "ui_SessionForm.h"
 #include "components/ListItemForm.h"
@@ -20,7 +21,6 @@ class ToolsForm : public QWidget
 
 public:
 	explicit ToolsForm(QWidget *parent = nullptr);
-	void initial();
 	void freshInfo();
 	~ToolsForm();
 
@@ -29,6 +29,8 @@ private:
 	//个人信息页由联系人信息页修改而来
 	Ui::SessionForm *ui;
 	SelfInfoForm *userInfoForm;
+public slots:
+	void initial();
 };
 
 #endif // TOOLSFORM_H

@@ -12,7 +12,7 @@ ToolsForm::ToolsForm(QWidget *parent) :
 	userInfoForm = new SelfInfoForm();
 	ui->horizontalLayout->addWidget(userInfoForm);
 	ui->list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	initial();
+	connect(MainSystem::getSystem(),  SIGNAL(initSelfInfoWidgets()), this, SLOT(initial()));
 }
 
 void ToolsForm::initial()

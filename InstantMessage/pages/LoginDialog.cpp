@@ -52,7 +52,7 @@ void LoginDialog::on_btRegister_clicked()
 
 void LoginDialog::on_btLogin_clicked()
 {
-	bool debug = true;
+	bool debug = false;
 	if (!debug) {
 		QString account = ui->editAccount->text().remove(QRegExp("\\s"));  //去除空格
 		QString password = ui->editPassword->text().remove(QRegExp("\\s"));

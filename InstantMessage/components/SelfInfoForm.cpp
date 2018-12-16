@@ -6,22 +6,29 @@ SelfInfoForm::SelfInfoForm(QWidget *parent) :
 {
 	ui->setupUi(this);
 }
+
+SelfInfoForm::~SelfInfoForm()
+{
+	delete ui;
+}
+
 void SelfInfoForm::loadSelfInfo()
 {
-	//从服务器请求数据
-	ui->labelNickName->setText("Karl");
-	ui->labelAccount->setText("12345");
-	ui->labelHead->setPixmap(QPixmap(":/src/image/head.png"));
-	ui->labelArea->setText(QString::fromLocal8Bit("未设置"));
+	//从内存读取数据
+	MainSystem *system = MainSystem::getSystem();
+	ui->labelNickName->setText(system->getSystemUser()->getNameUser());
+	ui->labelAccount->setText(system->getSystemUser()->getAccountUser());
+	ui->labelHead->setPixmap(QPixmap(*(system->getSystemUser()->getHeadImg())));
+	if (system->getSystemUser()->getArea() == "")
+		ui->labelArea->setText(QString::fromLocal8Bit("未设置"));
+	else
+		ui->labelArea->setText(system->getSystemUser()->getArea());
 	ui->btFunction->setText(QString::fromLocal8Bit("修改信息"));
 	ui->editAccount->setVisible(false);
 	ui->editArea->setVisible(false);
 	ui->editName->setVisible(false);
 }
-SelfInfoForm::~SelfInfoForm()
-{
-	delete ui;
-}
+
 
 void SelfInfoForm::on_btFunction_clicked()
 {

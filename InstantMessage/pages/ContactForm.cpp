@@ -20,6 +20,7 @@ ContactForm::ContactForm(QWidget *parent) :
 		//参数表示第几个好友
 		emit freshInfoPage(0);
 	}
+	connect(MainSystem::getSystem(),  SIGNAL(initFriendsWidgets()), this, SLOT(initial()));
 }
 
 
@@ -71,6 +72,8 @@ void ContactForm::refreshFriends()
 	MainSystem *system = MainSystem::getSystem();
 	//根据系统信息更新会话列表
 	ui->list->clear();
+	if (system->getFriends().size() == 0)
+		return;
 	for (auto iter : system->getFriends()) {
 		createOneFriendItem(iter.getIdUser(), *(iter.getHeadImg()), iter.getNameUser());
 	}
@@ -109,6 +112,5 @@ void ContactForm::addAllFriendsIntoList()
 		aitem->setSizeHint(QSize(ui->list->width(), 50));
 		ui->list->addItem(aitem);
 		ui->list->setItemWidget(aitem, friendFormList.at(i));
-
 	}
 }
